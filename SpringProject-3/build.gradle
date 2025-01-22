@@ -41,6 +41,12 @@ dependencies {
 	
 	implementation 'org.springframework.boot:spring-boot-starter-security:3.4.1'
 	
+	// 여기부터 라이엇 api 가져오기 위한 그래들
+	
+	
+	
+	
+	
 }
 
 tasks.named('test') {

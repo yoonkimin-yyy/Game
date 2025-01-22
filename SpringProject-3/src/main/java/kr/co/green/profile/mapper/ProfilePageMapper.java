@@ -1,0 +1,9 @@
+package kr.co.green.profile.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ProfilePageMapper {
+
+	
+}
