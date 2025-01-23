@@ -1,0 +1,238 @@
+/* 전체 화면 설정 */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #0F172A, #2B7A78);
+    
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    z-index: -1;
+}
+/* 회원가입 컨테이너 */
+.signup-container {
+    background-color: #1E293B; /* 다크 블루 */
+    color: white;
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-left: 700px;
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+.signup-logo {
+    margin-bottom: 20px;
+}
+
+.signup-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* 폼 스타일 */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form input {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #334155; /* 어두운 회색 배경 */
+    color: white;
+    font-size: 16px;
+}
+
+.signup-form input::placeholder {
+    color: #94A3B8; /* 연한 회색 */
+}
+
+.signup-form input:focus {
+    outline: none;
+    border: 2px solid #3B82F6; /* 파란색 포커스 테두리 */
+}
+.checkId-button{
+    padding: 10px 15px;
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 13px;
+}
+.checkEmail-button{
+    padding: 10px 15px;
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 13px;
+}
+/* 체크박스 스타일 */
+.checkbox-container {
+    display: flex;
+    margin-top: 10px;
+    text-align: left;
+    color: #94A3B8;
+    gap: 15px;
+    
+}
+
+
+.checkbox-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.checkbox-container input[type="checkbox"] {
+    width: 18px; /* 체크박스 너비 */
+    height: 18px; /* 체크박스 높이 */
+    transform: scale(1.2); /* 크기를 키움 */
+    cursor: pointer; 
+}
+
+
+/* 전화번호 입력 및 인증 */
+.phone-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.phone-input-container input {
+    flex: 1;
+}
+
+.verify-button {
+    padding: 10px 15px;
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+   
+}
+
+
+.verify-button:hover {
+    background-color: #2563EB;
+}
+
+/* 인증번호 입력 */
+.give-code {
+    display: none; /* 기본적으로 숨김 처리 */
+    margin-bottom: 15px;
+}
+
+.give-code input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    background-color: #334155;
+    color: white;
+    font-size: 16px;
+}
+
+/* 버튼 스타일 */
+.signup-button {
+    padding: 12px 20px;
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+    background-color: #2563EB;
+}
+
+.kakao-button {
+    padding: 12px 20px;
+    background-color: #FEE500;
+    color: #3C1E1E;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    padding-left: 90px;
+    padding-right: 95px;
+    
+    
+    
+}
+
+.kakao-button:hover {
+    background-color: #ECD900;
+}
+
+/* 하단 링크 */
+.signup-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #94A3B8;
+}
+
+.signup-footer a {
+    color: #3B82F6;
+    text-decoration: none;
+}
+
+.signup-footer a:hover {
+    text-decoration: underline;
+}
+#emailInput{
+    padding-right: 40px;
+}
+.checkCode{
+    padding: 10px 15px;
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}

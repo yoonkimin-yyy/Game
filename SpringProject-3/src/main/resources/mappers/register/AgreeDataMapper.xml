@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "kr.co.green.register.mapper.RegisterMapper">
+
+
+<resultMap id="AgreeDataResultMap" type="kr.co.green.register.dto.AgreeDTO">
+	<result column="agree_all" property="agreeAll"/>
+    <result column="essential_agree" property="essentialAgree"/>
+    <result column="personal_agree" property="personalAgree"/>
+    <result column="location_agree" property="locationAgree"/>
+    <result column="marketing_agree" property="marketingAgree"/>
+    <result column="agree_date" property="agreeDate"/>
+    <result column="user_no" property="userNo"/>
+</resultMap>
+
+
+
+<insert id="insertAgree">
+    INSERT INTO AgreeData (
+        agree_all,
+        essential_agree,
+        personal_agree,
+        location_agree,
+        marketing_agree,
+        agree_date,
+        user_no
+    )
+    VALUES (
+        #{agreeAll},
+        #{essentialAgree},
+        #{personalAgree},
+        #{locationAgree},
+        #{marketingAgree},
+        SYSDATE,
+        #{userNo}
+    )
+</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

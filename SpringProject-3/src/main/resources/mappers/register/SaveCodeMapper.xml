@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace ="kr.co.green.register.mapper.SaveCodeMapper">
+
+ <resultMap id="SaveCodeResultMap" type="kr.co.green.register.dto.SaveCodeDTO">
+   <result property="userNo" column="user_no"></result>
+   <result property="randomNumber" column="random_number"></result>
+   <result property="numberDate" column="number_date"></result>
+   <result property="expireDate" column="exprire_date"></result>
+ </resultMap>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

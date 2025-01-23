@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    
+    background: linear-gradient(135deg, #0F172A, #2B7A78);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background: #1E293B; /* Slightly lighter background for the login card */
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 150px;
+    margin-left: 700px;
+    margin-bottom: 150px;
+}
+
+.logo img {
+    width: 100px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.login-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    background: #334155;
+    color: #F1F5F9;
+    font-size: 16px;
+}
+
+.input-field::placeholder {
+    color: #94A3B8;
+}
+
+.login-button {
+    background: #0EA5E9;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.login-button:hover {
+    background: #0284C7;
+}
+
+.kakao-button {
+    background: #FEE500;
+    color: #3C1E1E;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.kakao-button:hover {
+    background: #E4C200;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #94A3B8;
+}
+
+.footer a {
+    color: #0EA5E9;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+.knowMessage{
+    display: none;
+}
+.warningMessage{
+    display: none;
+}
