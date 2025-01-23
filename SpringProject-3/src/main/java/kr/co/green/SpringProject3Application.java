@@ -1,4 +1,4 @@
-package ko.co.green;
+package kr.co.green;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
