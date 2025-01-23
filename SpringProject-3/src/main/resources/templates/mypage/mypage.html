@@ -61,7 +61,7 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a href="index.html" class="active" aria-label="Toggle navigation">홈</a>
+                                        <a th:href="@{/duo/mainpage/home}" class="active" aria-label="Toggle navigation">홈</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="about-us.html" aria-label="Toggle navigation">트롤게시판</a>
@@ -150,9 +150,13 @@
 
                             <div class="info-card2" id="card3">
                                 <!-- 사용자 프로필 -->
-                                <h3>사용자 프로필</h3>+
-                                <img src="/img/메인페이지 롤이미지2.png" alt="">
-                                <button id="profile-img-button">등록/변경</button>
+                                <h3>사용자 프로필</h3>
+                                <img th:src="@{{resourcesPath}/{folderNamePath}/{changeName}
+												(resourcesPath=${post.fileDTO.RESOURCES_PATH},
+												folderNamePath=${post.fileDTO.folderNamePath},
+												changeName=${post.fileDTO.changeName})}"
+												th:if="${post.fileDTO != null}"></img>
+               					<input type="file" id="file" name="file">
                             </div>
                             <div class="info-card2" id="card4">
                                 <h3>자기소개</h3>

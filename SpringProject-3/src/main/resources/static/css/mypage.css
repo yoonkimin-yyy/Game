@@ -2163,7 +2163,16 @@ main > div {
     width: 400px;
     height: 200px;
 }
-#profile-img-button {
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+#file {
     margin-left: 78%;
     margin-top: 5%;
     width: auto;
