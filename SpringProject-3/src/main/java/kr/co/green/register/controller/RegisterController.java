@@ -26,7 +26,7 @@ import kr.co.green.register.service.SmsService;
 
 
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/MatchMyduo")
 public class RegisterController {
 
 	private final RegisterServiceImpl registerService;
