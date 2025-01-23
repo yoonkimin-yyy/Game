@@ -151,11 +151,7 @@
                             <div class="info-card2" id="card3">
                                 <!-- 사용자 프로필 -->
                                 <h3>사용자 프로필</h3>
-                                <img th:src="@{{resourcesPath}/{folderNamePath}/{changeName}
-												(resourcesPath=${post.fileDTO.RESOURCES_PATH},
-												folderNamePath=${post.fileDTO.folderNamePath},
-												changeName=${post.fileDTO.changeName})}"
-												th:if="${post.fileDTO != null}"></img>
+                                
                					<input type="file" id="file" name="file">
                             </div>
                             <div class="info-card2" id="card4">
