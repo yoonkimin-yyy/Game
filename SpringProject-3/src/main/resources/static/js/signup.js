@@ -151,7 +151,7 @@ function validatePassword() {
 function inputEmail(){
     const email = document.getElementById('emailInput').value;
     const mailMsg = document.getElementById('emailMsg');
-    const emailRegex =  /^(?=.*\d)(?=.*@)(?=.*[a-zA-Z]).{14,}$/;
+    const emailRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const maxLength = 30;
 
     if(email === ""){

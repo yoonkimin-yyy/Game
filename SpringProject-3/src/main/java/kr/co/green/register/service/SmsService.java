@@ -6,7 +6,7 @@ public interface SmsService {
 
     String getVerificationCode(String phoneNumber); // 인증번호 조회
 
-    boolean verifyCode(String phoneNumber, String code); // 인증번호 검증
+    boolean verifyCode(String phoneNumber, int userInputNumber); // 인증번호 검증
 	
 	
 }

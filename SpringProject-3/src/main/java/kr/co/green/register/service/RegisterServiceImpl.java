@@ -1,11 +1,16 @@
 package kr.co.green.register.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.co.green.register.dto.AgreeDTO;
 import kr.co.green.register.dto.RegisterDTO;
+import kr.co.green.register.dto.SaveCodeDTO;
 import kr.co.green.register.mapper.RegisterMapper;
+import kr.co.green.register.mapper.SaveCodeMapper;
 
 @Service
 public class RegisterServiceImpl  implements RegisterService{
@@ -13,11 +18,14 @@ public class RegisterServiceImpl  implements RegisterService{
 	private final RegisterMapper registerMapper;
 	
 	private final PasswordEncoder passwordEncoder;
+	
+	private final SaveCodeMapper saveCodeMapper;
 
    
-    public RegisterServiceImpl(RegisterMapper registerMapper, PasswordEncoder passwordEncoder) {
+    public RegisterServiceImpl(RegisterMapper registerMapper, PasswordEncoder passwordEncoder,SaveCodeMapper saveCodeMapper) {
         this.registerMapper = registerMapper;
         this.passwordEncoder = passwordEncoder;
+        this.saveCodeMapper = saveCodeMapper;
     }
 
     @Override
@@ -69,11 +77,12 @@ public class RegisterServiceImpl  implements RegisterService{
     		return false;
     	}
     }
-    
-}
-	
-	
-	
+    @Override
+    public void saveVerificationCode(SaveCodeDTO saveCodeDTO) {
+    	saveCodeMapper.saveVerificationCode(saveCodeDTO);
+    }
+ 
+}	
 	
 	
 	

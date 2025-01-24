@@ -23,8 +23,8 @@ public class SmsController {
 		return "인증번호가 발송되었습니다.";
 	}
 	@PostMapping("/verify")
-	public boolean verifySms(@RequestParam String phoneNumber, @RequestParam String code) {
-		return smsService.verifyCode(phoneNumber, code);
+	public boolean verifySms(@RequestParam String phoneNumber, int userInputNumber) {
+		return smsService.verifyCode(phoneNumber,  userInputNumber);
 	}
 	
 	
