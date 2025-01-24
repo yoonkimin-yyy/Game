@@ -28,6 +28,7 @@ public class RegisterDTO {
     private String roleEnum;       // ROLE_ENUM: 사용자 역할 (기본값 USER)
     private String userIntroduce;  // USER_INTRODUCE: 자기소개
     private String userRiot;       // USER_RIOT: Riot 계정 연동 여부 (기본값 NO)
+    private int userInputCode;
 	
 	
 	

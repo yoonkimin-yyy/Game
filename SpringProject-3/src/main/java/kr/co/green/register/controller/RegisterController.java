@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.green.register.dto.AgreeDTO;
@@ -43,41 +44,37 @@ public class RegisterController {
 	
 	
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute RegisterDTO registerDTO, 
-					@RequestParam String verificationCode
-					) {
+	public String signup(@ModelAttribute RegisterDTO registerDTO, @RequestParam("userInputCode") int userInputCode) {
 		// 1. 인증발송 버튼을 누르면 SmsServiceImpl가 실행
 		// 2. Mapper랑 테이블까지 쭉 만들어서 인증 번호를 저장
 		//    -> 생성된 랜덤 숫자(6자), 회원에 대한 정보(no), 생성 날짜, 유효 날짜
-		
 		// 3. 자바스크립트에서 인증 번호가 틀리면 '회원가입 버튼 안눌려야 함' 맞으면 회원가입 요청(사용자가 입력한 인증 코드도 전송)
+		
+		// -----------------------------
+		// - ServiceImpl -> Mapper -> Oracle
+		// - 사용자가 입력한 핸드폰번호를 조건으로 SELECT
+		// - 내림차순, 가장 최근꺼 1개, 현재시간이 만료시간을 지나지 않았을 때
+		// - 위의 조건에 만족하는 코드(RANDOM_NUMBER)를 가져와야 함
+		
+		
 		// 4. DB에서 저장했던 랜덤 숫자를 꺼내오고, 사용자가 입력한 인증 코드랑 일치하는지 확인
 		// 5. 일치하면 회원가입 진행, 실패하면 ~~
+		String phoneNumber = registerDTO.getUserPhone();
 		
-		//1 인증번호 생성및 전송
-		String code = smsService.sendCertificationCode(registerDTO.getUserPhone());
-		//2 랜덤 인증 번호 저장
-		SaveCodeDTO saveCode = new SaveCodeDTO();
-		saveCode.setRandomNumber(Integer.parseInt(code));
-		saveCode.setNumberDate(new Date().toString());
-		saveCode.setExpireDate(new Date(System.currentTimeMillis()+1000).toString());
-		saveCode.setUserNo(registerDTO.getUserNo());
-		saveCodeMapper.saveCode(saveCode);
+		boolean isVerified = smsService.verifyCode(phoneNumber, userInputCode);
 		
+		if(!isVerified) {
+			return "MatchMyduo/signup";
+		}
 		
-		// 인증번호 검증
-		boolean isVerified = smsService.verifyCode(registerDTO.getUserPhone(), verificationCode);
-	    if (!isVerified) {
-	        return "redirect:/register/signup?error=verificationFailed";
-	    }
 		// 회원가입 요청 처리
 		int result = registerService.signup(registerDTO);
 		System.out.println(registerDTO.getNickName());
 		
 		if(result > 0) {
-			return "redirect/signin/form";
+			return "register/signin";
 		}else {
-			return "redirect/register/signup";
+			return "/MatchMyduo/signup";
 		}
 		
 		
@@ -104,6 +101,7 @@ public class RegisterController {
 	@PostMapping("/sendSms")
 	@ResponseBody
 	public String sendSms(@RequestParam("phoneNumber") String phoneNumber) {
+		System.out.println("dfsfsfs");
 		String result = smsService.sendCertificationCode(phoneNumber);
 		
 		// /templates/인증번호가 발송되었습니다..html
@@ -118,7 +116,7 @@ public class RegisterController {
 	}
 	
 	@GetMapping("register/signin")
-	public String singin() {
+	public String singinForm() {
 		return "register/signin";
 	}
 	// 로그인
@@ -132,12 +130,12 @@ public class RegisterController {
 		
 		
 		if(loginUser != null) {
-			
+			session.setAttribute("userNo", loginUser.getUserNo());
 			session.setAttribute("userId", loginUser.getUserId());
 			session.setAttribute("userEmail", loginUser.getUserEmail());
 			
 		
-			return "redirect:/register/home";
+			return  "redirect:/MatchMyduo/home";
 		}
 		
 		return "/register/signup";

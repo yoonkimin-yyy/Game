@@ -17,7 +17,7 @@
             <img src="/img/logo.png" alt="MatchMyDuo Logo"> <!-- Replace with your logo -->
         </div>
         <h1 class="login-title" style="color: white;">Log In to MatchMyDuo</h1>
-        <form th:action="@{/register/signin}" method="POST">
+        <form th:action="@{/MatchMyduo/signin}" method="POST">
             <input type="text" class="input-field" placeholder="UserId or Email" name="userId" 
                    th:value="${userId}" maxlength="30" required>
             <span id="messageAalram" class="knowMessage" th:if="${errorMessage != null}" 

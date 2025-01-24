@@ -18,7 +18,7 @@
     <div class="signup-container">
         <div class="signup-logo"></div>
         <h1 class="signup-title">회원가입</h1>
-        <form class="signup-form" th:action="@{/register/signup}" method="POST">
+        <form class="signup-form" th:action="@{/MatchMyduo/signup}" method="POST" id="formData">
             <input type="text" placeholder="사용자 이름" required onkeyup="checkInputLength()" id="nameInput" maxlength="17" name="userName" th:value="${registerDTO?.userName}">
             <span id="nameInputMsg"></span>
             <input type="text" placeholder="닉네임" required onkeyup="checkNickName()" id="nickNameInput" maxlength="17" name="nickName" th:value="${registerDTO?.nickName}">
@@ -59,17 +59,17 @@
             </div>
     
             <div class="phone-input-container" style="display: flex; align-items: center;">
-                <input type="tel" placeholder="전화번호" style="flex: 1;" required onkeyup="putPhoneNumber()" id="inputNumber" name=userPhone th:value="${registerDTO?.userPhone}">
+                <input type="tel" placeholder="전화번호" style="flex: 1;" required onkeyup="putPhoneNumber()" id="inputNumber" name="userPhone" th:value="${registerDTO?.userPhone}">
                 <button type="button" class="verify-button" style="margin-bottom: 15px;" onclick="showCheckboxes()">인증번호 발송</button>
             </div>
             <span id="annoyMsg"></span>
             <span id="phoneMsg"></span>
     
             <div class="give-code" style="display: none; align-items: center; gap: 10px;">
-                <input type="text" placeholder="인증번호 입력" required id="input-code" oninput="checkCodeNumber()">
+                <input type="text" placeholder="인증번호 입력" name="userInputCode" required id="input-code" oninput="checkCodeNumber()">
                 <span id="errorMsg"></span>
             </div>
-            <button type="submit" class="signup-button" >회원가입</button>
+            <button type="button" class="signup-button" onclick="checkTest()">회원가입</button>
         </form>
         <button class="kakao-button">카카오로 회원가입</button>
         <div class="signup-footer">
@@ -84,7 +84,11 @@
     <i class="lni lni-chevron-up"></i>
 </a>
  <!-- ========================= JS here ========================= -->
+<<<<<<< HEAD
  <script src="/js/SmsService.js"></script>
+=======
+  <script src="/js/SmsService.js"></script>
+>>>>>>> branch 'master' of https://github.com/yoonkimin-yyy/Game.git
  <script src="/js/bootstrap.min.js"></script>
  <script src="/js/wow.min.js"></script>
  <script src="/js/tiny-slider.js"></script>

@@ -9,6 +9,6 @@ public interface SaveCodeMapper {
 
 	int saveCode(SaveCodeDTO saveCodeDTO);
 	
-	SaveCodeDTO findCode(long userNo);
-	
+	public void saveVerificationCode(SaveCodeDTO saveCodeDTO); // 인증번호 저장
+	SaveCodeDTO getVerificationCodeByPhone(String phoneNumber);// 사용자 번호로 최신 인증번호 저장
 }

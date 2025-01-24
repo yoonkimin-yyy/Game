@@ -9,7 +9,7 @@ function checkIdDuplicate() {
     // AJAX 요청
     $.ajax({
         type: "GET",
-        url: "/register/checkId",
+        url: "/MatchMyduo/checkId",
         data: { userId: getId }, // 서버에서 기대하는 파라미터 키 확인
         success: function (res) {
             // 반환값이 문자열로 전달되는 경우

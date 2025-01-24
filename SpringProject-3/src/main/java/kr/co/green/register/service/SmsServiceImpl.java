@@ -1,6 +1,10 @@
 package kr.co.green.register.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -8,6 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
+import kr.co.green.register.dto.RegisterDTO;
+import kr.co.green.register.dto.SaveCodeDTO;
+import kr.co.green.register.mapper.SaveCodeMapper;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
@@ -15,6 +22,12 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Service
 public class SmsServiceImpl implements SmsService{
+	
+	private final SaveCodeMapper saveCodeMapper;
+	
+	public  SmsServiceImpl(SaveCodeMapper saveCodeMapper) {
+		this.saveCodeMapper = saveCodeMapper;
+	}
 	
 	@Value("${coolsms.apikey}")
     private String apiKey;
@@ -50,20 +63,43 @@ public class SmsServiceImpl implements SmsService{
 //    	// 메세지 발송
 //    	messageService.sendOne(new SingleMessageSendingRequest(message));
 
+    	SaveCodeDTO saveCode = new SaveCodeDTO();
+    	
+    	saveCode.setRandomNumber(code);
+    	saveCode.setUserPhone(phoneNumber);
+    	
+    	saveCodeMapper.saveVerificationCode(saveCode);
+    	
+    	
     	return code;
     }
-    
-	@Override
-    public String getVerificationCode(String phoneNumber) {
-        // 저장된 인증번호 조회
-        return verificationCodes.get(phoneNumber);
-    }
-	
     @Override
-    public boolean verifyCode(String phoneNumber, String code) {
-        // 저장된 인증번호와 입력된 인증번호 비교
-        String storedCode = verificationCodes.get(phoneNumber);
-        return storedCode != null && storedCode.equals(code);
+    public boolean verifyCode(String phoneNumber, int userInputCode) {
+    	SaveCodeDTO saveCode = saveCodeMapper.getVerificationCodeByPhone(phoneNumber);
+    	
+    	System.out.println(saveCode.getRandomNumber());
+    	System.out.println(phoneNumber);
+    	if(saveCode == null) {
+    		return false;
+    	}
+    	
+    	// 현재 시간
+    	Date currentTime = new Date();
+    	
+    	Date expireDate = saveCode.getExpireDate();
+    	
+    	// 현재시간이랑 만료시간 비교
+    	if(expireDate != null && currentTime.after(expireDate)) {
+    		
+    		return false;
+    	}
+    	
+    	String randomCode = saveCode.getRandomNumber();
+    	
+    	String userCode = String.valueOf(userInputCode);
+    	
+    	return randomCode.equals(String.valueOf(userCode));
+    	
     }
     private String generateRandomCode(int length) {
     	// 인증번호 생성(랜덤숫자6)
@@ -75,7 +111,18 @@ public class SmsServiceImpl implements SmsService{
     	return code.toString();
     }
     
-    
-    
+    @Override
+    public String getVerificationCode(String phoneNumber) {
+    	SaveCodeDTO saveCode = saveCodeMapper.getVerificationCodeByPhone(phoneNumber);
+        
+    	//조회결과 없으면 NULL반환이나 예외처리
+    	if (saveCode == null) {
+            return null;
+            
+        }
+    	//DB에 문자열로 저장된 랜덤인증 코드 반환
+    	return saveCode.getRandomNumber();
+    	
+    }
 
 }
