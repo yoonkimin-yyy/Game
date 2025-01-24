@@ -15,7 +15,7 @@ public class RegisterDTO {
 
 	
 	
-	private Long userNo;           // USER_NO: 사용자 고유 번호
+	private int userNo;           // USER_NO: 사용자 고유 번호
     private String userName;       // USER_NAME: 사용자 이름
     private String nickName;       // NICK_NAME: 닉네임
     private String userId;         // USER_ID: 사용자 ID

@@ -13,5 +13,7 @@ public class AgreeDTO {
 	private String personalAgree; //  개인 수집 동의
 	private String locationAgree; //  위치 수집 동의 
 	private String marketingAgree; // 마케팅 동의
-	private String agreeDate;
+	private String agreeDate; 
+	private String personalOption; // 선택 동의
+	private String realNameAgree;
 }
