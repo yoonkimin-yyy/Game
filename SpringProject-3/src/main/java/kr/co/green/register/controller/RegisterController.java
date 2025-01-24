@@ -39,10 +39,7 @@ public class RegisterController {
 		this.smsService = smsService;
 		this.saveCodeMapper = saveCodeMapper;
 	}
-	@GetMapping("/home")
-	public String home() {
-		return "register/home";
-	}
+	
 	
 	
 	@PostMapping("/signup")
@@ -114,7 +111,7 @@ public class RegisterController {
 		
 	}
 	
-	@PostMapping("register/form")
+	@PostMapping("/register/form")
 	public String register() {
 		
 		return "register/signup";

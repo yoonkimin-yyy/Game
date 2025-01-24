@@ -110,6 +110,24 @@
                         <button class="position-button">
                             <img src="/img/서폿라인.svg" alt="Support">
                         </button>
+                        </div>
+                    <label>찾는 포지션</label>
+                    <div class="positions">
+                        <button class="find-position-button">
+                            <img src="/img/탑라인.svg" alt="">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/정글라인.svg" alt="Jungle">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/미드라인.svg" alt="Mid">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/바텀라인.svg" alt="Bot">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/서폿라인.svg" alt="Support">
+                        </button>
                     </div>
                 </div>
                 <div class="form-group">
@@ -263,6 +281,23 @@
         });
         cu.start();
     </script>
-
-
 </html>
+
+<script>
+  var summonername = "TraversTT";
+  var api_key1= "RGAPI-faa24592-2f88-459c-91b5-a2c1fb607fad";
+  var headers1 = {
+    'X-Riot-Token': "RGAPI-faa24592-2f88-459c-91b5-a2c1fb607fad",
+  }
+  var settings = {
+    "async": true,
+    "type": "GET",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/고 구 마/맛 탕?api_key="+api_key1,
+    "headers": headers1,
+  };
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+</script>
+
+
