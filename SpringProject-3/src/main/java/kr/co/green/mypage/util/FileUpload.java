@@ -16,6 +16,7 @@ public class FileUpload {
 public void uploadFile(MultipartFile file, fileDTO fileDTO, String folderName) throws IOException {
 		
 		
+		
 		// 원본 파일 이름 저장
 		String originalFileName = file.getOriginalFilename();
 		

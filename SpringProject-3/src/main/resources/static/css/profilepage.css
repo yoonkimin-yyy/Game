@@ -665,7 +665,7 @@ ol {
 }
 
 /* Preloader */
-.preloader {
+/* .preloader {
   position: fixed;
   top: 0;
   left: 0;
@@ -718,7 +718,7 @@ ol {
             transform: scale(1, 1);
     opacity: 0;
   }
-}
+} */
 
 @-webkit-keyframes preloader-fx {
   0% {

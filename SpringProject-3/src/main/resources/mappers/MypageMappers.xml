@@ -3,4 +3,20 @@
 						"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="kr.co.green.mypage.mapper.MyPageMapper">
 
+<!-- <insert>
+	<selectKey keyProperty="MyPageDTO.no" resultType="int" order="BEFORE">
+		SELECT user_info_seq.NEXTVAL FROM dual
+	</selectKey>
+	
+	INSERT INTO user_info
+</insert> -->
+
+
+
+
+
+
+
+
+
 </mapper>

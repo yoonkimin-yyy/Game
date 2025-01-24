@@ -81,3 +81,22 @@ function clickFnc5(){
 }
 
 
+
+document.getElementById('uploadForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // 폼 제출 기본 동작을 막고, AJAX 요청을 보냄
+
+    var formData = new FormData(this);
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 서버에서 반환된 이미지 URL로 이미지를 표시
+        var img = document.getElementById('uploadedImage');
+        img.src = data;  // 서버에서 반환한 이미지 경로
+        img.style.display = 'block';  // 이미지 표시
+    })
+    .catch(error => console.error('파일 업로드 실패:', error));
+});

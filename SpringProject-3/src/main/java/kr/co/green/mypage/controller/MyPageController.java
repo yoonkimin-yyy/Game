@@ -24,7 +24,7 @@ public class MyPageController {
 	@GetMapping("/mypage/home")
 	public String myPageHome() {
 		String email = myPageService.getUserEmail();
-		return "mypage/mypage.html";
+		return "mypage/mypage";
 	}
 	
 	

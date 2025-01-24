@@ -6,7 +6,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class MyPageDTO {
-
+	
+	private int no; // 유저 고유 번호
 	private String userEmail; // 유저 아이디(이메일)
 	private String userProfile; // 유저 프로필(경로)
 	private String userIntroduce; // 유저 자기소개
