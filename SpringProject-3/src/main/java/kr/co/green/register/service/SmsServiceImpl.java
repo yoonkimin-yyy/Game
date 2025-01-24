@@ -55,13 +55,13 @@ public class SmsServiceImpl implements SmsService{
     	// 6자리 랜덤 인증번호 생성
     	String code =  generateRandomCode(6);
     	// sms 메세지 작성
-//    	Message message = new Message();
-//    	message.setFrom(fromNumber);
-//    	message.setTo(phoneNumber);
-//    	message.setText("인증번호는 [" + code + "] 입니다.");
-//    	
-//    	// 메세지 발송
-//    	messageService.sendOne(new SingleMessageSendingRequest(message));
+    //	Message message = new Message();
+    //	message.setFrom(fromNumber);
+    //	message.setTo(phoneNumber);
+    //	message.setText("인증번호는 [" + code + "] 입니다.");
+    	
+    	// 메세지 발송
+    //	messageService.sendOne(new SingleMessageSendingRequest(message));
 
     	SaveCodeDTO saveCode = new SaveCodeDTO();
     	
