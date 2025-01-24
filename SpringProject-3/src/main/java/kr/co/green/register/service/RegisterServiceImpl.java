@@ -43,13 +43,18 @@ public class RegisterServiceImpl  implements RegisterService{
     }
 
     @Override
-    public int signup(RegisterDTO registerDTO) {
+    public int signup(RegisterDTO registerDTO,AgreeDTO agreeDTO) {
         // 비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(registerDTO.getUserPassword());
         registerDTO.setUserPassword(encodedPassword);
 
         // 회원가입 처리
-        return registerMapper.insertUser(registerDTO);
+        registerMapper.insertUser(registerDTO);
+        
+        agreeDTO.setUserNo(registerDTO.getUserNo());
+        
+        return registerMapper.insertCheckDate(agreeDTO);
+        
     }
    @Override
    public RegisterDTO signIn(RegisterDTO registerDTO) {

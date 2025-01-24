@@ -17,33 +17,43 @@ function toggleAll(A){
 }
 
 let checkData =  {
-    checkbox1: "N",
-    checkbox2: "N",
-    checkbox3: "N",
-    checkbox4: "N",
-	agreeAll: "N"
+			agreeAll: "N",
+	        essentialAgree: "N",           // essentiaBox1
+	        personalAgree: "N",            // essentiaBox2
+	        realNameAgree: "N",            // anything1
+	        locationAgree: "N",            // anything2
+	        personalAgreeOptional: "N",    // anything3
+	        marketingAgree: "N",           // anything4
+	        userNo: 0    
 };
 
 function checkAnything(){
-        
-    const eleCheckbox1 = document.getElementById("anything1");
-    const eleCheckbox2 = document.getElementById("anything2");
-    const eleCheckbox3 = document.getElementById("anything3");
-    const eleCheckbox4 = document.getElementById("anything4");
-	const agreeAll = document.getElementById("agreeAll");
+	
+			const chAgreeAll    = document.getElementById("agreeAll");
+	        const chEssential   = document.getElementById("essentiaBox1");
+	        const chPersonal    = document.getElementById("essentiaBox2");
+	        const chRealName    = document.getElementById("anything1");
+	        const chLocation    = document.getElementById("anything2");
+	        const chPersonalOpt = document.getElementById("anything3");
+	        const chMarketing   = document.getElementById("anything4");
 
+			
 
     // 전역 변수에 데이터 넣어야 함
-    checkData.checkbox1 = (eleCheckbox1.checked ? "Y" : "N");
-    checkData.checkbox2 = eleCheckbox2.checked ? "Y" : "N";
-    checkData.checkbox3 = eleCheckbox3.checked ? "Y" : "N";
-    checkData.checkbox4 = eleCheckbox4.checked ? "Y" : "N";
-	checkData.agreeAll = agreeAll.checked ? "Y" : "N";
+			checkData.agreeAll               = chAgreeAll.checked    ? "Y" : "N";
+	        checkData.essentialAgree         = chEssential.checked   ? "Y" : "N";
+	        checkData.personalAgree          = chPersonal.checked    ? "Y" : "N";
+	        checkData.realNameAgree          = chRealName.checked    ? "Y" : "N";
+	        checkData.locationAgree          = chLocation.checked    ? "Y" : "N";
+	        checkData.personalAgreeOptional  = chPersonalOpt.checked ? "Y" : "N";
+	        checkData.marketingAgree         = chMarketing.checked   ? "Y" : "N";
 }
 
  function essential(){
         const essentialBox1 = document.getElementById("essentiaBox1");
         const essentialBox2 = document.getElementById("essentiaBox2");
+		
+		
     
         if(!essentialBox1.checked || !essentialBox2.checked){
             swal({
@@ -53,6 +63,9 @@ function checkAnything(){
                 confirmButtonText : '확인'
             })
         }else if(essentialBox1.checked && essentialBox2.checked){
+			
+			checkAnything();
+			
             const submitForm = document.getElementById('submitForm');
     
             // 1. 전역변수에 저장된 데이터 확인 ("Y", "N")

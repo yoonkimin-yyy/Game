@@ -37,6 +37,11 @@
 
 
 <insert id="insertUser">
+
+ <selectKey keyProperty="userNo" resultType="int" order="BEFORE">
+        SELECT user_info_seq.NEXTVAL FROM DUAL
+ </selectKey>
+    
         INSERT INTO user_info (
             user_no, 
             user_name, 
@@ -52,7 +57,7 @@
             user_introduce, 
             user_riot
         ) VALUES (
-           	user_info_seq.nextval, 
+           	#{userNo}, 
             #{userName}, 
             #{nickName}, 
             #{userId}, 
@@ -66,13 +71,39 @@
             null, 
             default
         )
+ 	</insert>
+    
+   <!-- 체크박스 데이터 넣기 -->
+    <insert id="insertCheckDate" parameterType="kr.co.green.register.dto.AgreeDTO">
+    INSERT INTO AgreeData(
+    		agree_all,
+            essential_agree,
+            personal_agree,
+            location_agree,
+            marketing_agree,
+            agree_date,
+            user_no,
+            realName_agree,
+            personal_agreeOptional
+        ) 
+        VALUES (
+            #{agreeAll},
+            #{essentialAgree},
+            #{personalAgree},
+            #{locationAgree},
+            #{marketingAgree},
+            SYSDATE,
+            #{userNo},
+            #{realNameAgree},
+            #{personalOption}
+        )
     </insert>
+    
+    
 	<select id="signIn" resultMap="userResultMap">
 	SELECT * FROM USER_INFO
 	WHERE user_id = #{userId}
 	or user_email = #{userId}
-	
-	
 	
 	</select>
 		

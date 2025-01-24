@@ -44,16 +44,16 @@
             <!-- 체크박스 위치 -->
             <div class="checkbox-container">
                 <label>
-                    <input type="radio" name="userAgency" value="SKT"> SKT
+                    <input type="radio" name="userAgency" value="SKT"   th:checked="${registerDTO?.userAgency} == 'SKT'"> SKT
                 </label>
                 <label>
-                    <input type="radio" name="userAgency" value="KT"> KT
+                    <input type="radio" name="userAgency" value="KT"  	th:checked="${registerDTO?.userAgency} == 'KT'"> KT
                 </label>
                 <label>
-                    <input type="radio" name="userAgency" value="LG"> LG U+
+                    <input type="radio" name="userAgency" value="LG" 	th:checked="${registerDTO?.userAgency} == 'LG'"/> LG U+
                 </label>
                 <label>
-                    <input type="radio" name="userAgency" value="ANY"> 기타
+                    <input type="radio" name="userAgency" value="ANY" 	th:checked="${registerDTO?.userAgency} == 'ANY'"> 기타
                 </label>
                 
             </div>
@@ -70,10 +70,19 @@
                 <span id="errorMsg"></span>
             </div>
             <button type="button" class="signup-button" onclick="checkTest()">회원가입</button>
+            <input class="checkbox-hidden"  type="hidden" name="agreeAll" th:value="${agreeDTO?.agreeAll}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="essentialAgree" th:value="${agreeDTO.essentialAgree}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="personalAgree" th:value="${agreeDTO.personalAgree}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="locationAgree" th:value="${agreeDTO.locationAgree}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="marketingAgree" th:value="${agreeDTO.marketingAgree}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="agreeDate" th:value="${agreeDTO.agreeDate}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="userNo" th:value="${agreeDTO.userNo}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="personalOption" th:value="${agreeDTO.personalOption}" ></input>
+            <input class="checkbox-hidden"  type="hidden" name="realNameAgree" th:value="${agreeDTO.realNameAgree}" ></input>
         </form>
         <button class="kakao-button">카카오로 회원가입</button>
         <div class="signup-footer">
-            <p>이미 계정이 있으신가요? <a href="./rogin.html" class="login-button">로그인</a></p>
+            <p>이미 계정이 있으신가요? <a href="@{/MatchMyduo/register/signin}" class="login-button">로그인</a></p>
         </div>
     </div>
 </body>
