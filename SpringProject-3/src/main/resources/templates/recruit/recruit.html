@@ -91,6 +91,7 @@
                 <div class="form-group">
                     <label for="summoner-name">소환사 이름 (KR)</label>
                     <input type="text" id="summoner-name" placeholder="플레이어 이름 + #KR1" />
+                    <button class="register-button" onclick="findInfo()">정보등록</button>
                 </div>
                 <div class="form-group">
                     <label>나의 포지션</label>
@@ -110,6 +111,24 @@
                         <button class="position-button">
                             <img src="/img/서폿라인.svg" alt="Support">
                         </button>
+                        </div>
+                    <label>찾는 포지션</label>
+                    <div class="positions">
+                        <button class="find-position-button">
+                            <img src="/img/탑라인.svg" alt="">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/정글라인.svg" alt="Jungle">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/미드라인.svg" alt="Mid">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/바텀라인.svg" alt="Bot">
+                        </button>
+                        <button class="find-position-button">
+                            <img src="/img/서폿라인.svg" alt="Support">
+                        </button>
                     </div>
                 </div>
                 <div class="form-group">
@@ -124,8 +143,6 @@
                     <textarea id="memo" rows="3" placeholder="함께 할 DUO 파트너를 찾고 있어요."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="delete-code">삭제 비밀번호 *</label>
-                    <input type="text" id="delete-code" placeholder="4자리 숫자로 입력해주세요" />
                     <div class="note">단어에 대한 모욕, 명예훼손, 성희롱 등의 행위는 신고 시 법적 처벌을 받을 수 있습니다.</div>
                 </div>
                 <div class="buttons">
@@ -222,6 +239,7 @@
     <script src="/js/count-up.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/recruit.js"></script>
+    <script src="/js/riotinfo.js"></script>
     
     <script>
         //========= testimonial 
@@ -263,6 +281,7 @@
         });
         cu.start();
     </script>
-
-
 </html>
+
+
+

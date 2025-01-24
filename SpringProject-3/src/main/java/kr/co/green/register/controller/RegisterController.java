@@ -90,7 +90,7 @@ public class RegisterController {
 		
 	}
 	
-	@PostMapping("register/form")
+	@PostMapping("/register/form")
 	public String register() {
 		
 		return "register/signup";
