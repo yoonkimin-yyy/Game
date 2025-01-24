@@ -91,6 +91,7 @@
                 <div class="form-group">
                     <label for="summoner-name">소환사 이름 (KR)</label>
                     <input type="text" id="summoner-name" placeholder="플레이어 이름 + #KR1" />
+                    <button class="register-button" onclick="findInfo()">정보등록</button>
                 </div>
                 <div class="form-group">
                     <label>나의 포지션</label>
@@ -142,8 +143,6 @@
                     <textarea id="memo" rows="3" placeholder="함께 할 DUO 파트너를 찾고 있어요."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="delete-code">삭제 비밀번호 *</label>
-                    <input type="text" id="delete-code" placeholder="4자리 숫자로 입력해주세요" />
                     <div class="note">단어에 대한 모욕, 명예훼손, 성희롱 등의 행위는 신고 시 법적 처벌을 받을 수 있습니다.</div>
                 </div>
                 <div class="buttons">
@@ -240,6 +239,7 @@
     <script src="/js/count-up.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/recruit.js"></script>
+    <script src="/js/riotinfo.js"></script>
     
     <script>
         //========= testimonial 
@@ -283,55 +283,5 @@
     </script>
 </html>
 
-<script>
-
-
-$.ajax({
-    method : "GET",
-    url : "https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/고 구 마/맛  탕?api_key=RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d",
-    data : {gameName : "고 구 마" , tagLine : "맛  탕"},
-    headers : {'X-Riot-Token' : "RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d"}
-})
-.done(function(msg){
-    console.log(msg);
-    const puuid = msg.puuid;
-
-    $.ajax({
-        method : "GET",
-        url : `https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d`,
-        headers : {'X-Riot-Token' : "RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d"}
-    })
-    .done(function(msg){
-        console.log(msg[0]);
-        const matchId = msg[0];
-
-        $.ajax({
-            method : "GET",
-            url : `https://asia.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d`,
-            headers : {'X-Riot-Token' : "RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d"}
-        })
-        .done(function(msg){
-            console.log(msg);
-            let summonerId = "";
-            for(let i = 0; i<10; i++){
-                if(msg.info.participants[i].puuid == puuid){
-                    
-                    summonerId = msg.info.participants[i].summonerId;
-                    console.log(summonerId)
-                }
-            }
-            $.ajax({
-                method : "GET",
-                url : `https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d`,
-                headers : {'X-Riot-Token' : "RGAPI-2405bbcf-a7b7-4426-80c9-8eabe10faa0d"},
-            })
-            .done(function(msg){
-            	console.log("-------------")
-                console.log(msg);
-            })
-        })
-    })
-})
-</script>
 
 
