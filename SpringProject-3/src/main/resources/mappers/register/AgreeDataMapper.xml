@@ -16,27 +16,6 @@
 
 
 
-<insert id="insertAgree">
-    INSERT INTO AgreeData (
-        agree_all,
-        essential_agree,
-        personal_agree,
-        location_agree,
-        marketing_agree,
-        agree_date,
-        user_no
-    )
-    VALUES (
-        #{agreeAll},
-        #{essentialAgree},
-        #{personalAgree},
-        #{locationAgree},
-        #{marketingAgree},
-        SYSDATE,
-        #{userNo}
-    )
-</insert>
-
 
 
 
