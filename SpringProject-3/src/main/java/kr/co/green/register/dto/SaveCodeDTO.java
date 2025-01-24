@@ -1,5 +1,7 @@
 package kr.co.green.register.dto;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +10,9 @@ import lombok.Setter;
 public class SaveCodeDTO {
 
 	
-		private long userNo;
-	 	private int randomNumber;
-	    private String numberDate;
-	    private String expireDate;
+		private String userPhone;
+	 	private String randomNumber;
+	    private Date numberDate;
+	    private Date expireDate;
+	    
 }
