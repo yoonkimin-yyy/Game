@@ -5,6 +5,7 @@
 <head>
     <title>약관 동의</title>
     <link rel="stylesheet" href="/css/agree.css">
+    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <header th:replace = "~{fragments/common/header :: HeaderFragment}"></header>
@@ -322,7 +323,7 @@ MyMatchDuo 및 MyMatchDuo 관련 제반 서비스(모바일 웹/앱 포함)의 �
     </label>
 </div>
         <div class="agreement-footer">
-            <form th:action="@{/register/register/form}" method="post" id="submitForm">
+            <form th:action="@{/MatchMyduo/register/form}" method="post" id="submitForm">
                 <button class="btn-submit" id="submitBtn" onclick="essential()"  type="button">다음</button>
             </form>
         </div>
@@ -423,6 +424,7 @@ MyMatchDuo 및 MyMatchDuo 관련 제반 서비스(모바일 웹/앱 포함)의 �
     
     
     </script>
+    
 </body>
 
 </html>

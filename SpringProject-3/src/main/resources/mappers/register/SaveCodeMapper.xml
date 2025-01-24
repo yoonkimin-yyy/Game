@@ -4,15 +4,40 @@
 <mapper namespace ="kr.co.green.register.mapper.SaveCodeMapper">
 
  <resultMap id="SaveCodeResultMap" type="kr.co.green.register.dto.SaveCodeDTO">
-   <result property="userNo" column="user_no"></result>
+  	<result property="userPhone"    column="user_phone"></result>
    <result property="randomNumber" column="random_number"></result>
    <result property="numberDate" column="number_date"></result>
-   <result property="expireDate" column="exprire_date"></result>
+   <result property="expireDate" column="EXPIRE_DATE"></result>
  </resultMap>
 
+<insert id="saveVerificationCode">
+        INSERT INTO save_code (
+            savecode_no, 
+            RANDOM_NUMBER, 
+            NUMBER_DATE, 
+            USER_PHONE
+        ) VALUES (
+            save_code_seq.nextval, 
+            #{randomNumber}, 
+            sysdate,  
+            #{userPhone}
+        )
+</insert>
+<select id="getVerificationCodeByPhone" resultMap="SaveCodeResultMap">
+	SELECT 
+        TO_CHAR(RANDOM_NUMBER) AS RANDOM_NUMBER,
+        EXPIRE_DATE,
+        NUMBER_DATE
+    FROM SAVE_CODE
+    WHERE USER_PHONE = #{userPhone}
+      AND EXPIRE_DATE > SYSDATE
+    ORDER BY NUMBER_DATE DESC
+    FETCH FIRST 1 ROWS ONLY
+</select>
 
-
-
+ 
+ 
+ 
 
 
 
