@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>실시간 채팅</title>
+    <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+    <div class="container">
+        <div class="chatroom-list">
+            <h3>채팅방 목록</h3>
+            <div class="chatroom-item"
+                 th:each="room : ${chatRooms}"
+                 th:text="${room.roomName}"
+                 th:data-room-id="${room.roomId}"
+                 onclick="joinRoom(this.getAttribute('data-room-id'))">
+            </div>
+        </div>
+        
+        <div class="chat-area">
+            <div id="chatContainer">
+                <ul id="chatMessages"></ul>
+            </div>
+            
+            <form id="chatForm">
+                <input id="chatInput" type="text" placeholder="메시지를 입력하세요..." autocomplete="off" required>
+                <button id="sendButton" type="submit">전송</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/chat.js"></script>
+    <script src="/js/Socket.js"></script>
+</body>
+</html>
