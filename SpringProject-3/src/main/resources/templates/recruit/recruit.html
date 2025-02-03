@@ -4,6 +4,7 @@
 <head th:replace = "~{fragments/common/head :: HeadFragment}"></head>
 <head>
 	<link rel="stylesheet" href="/css/recruit.css">
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 	
@@ -84,6 +85,7 @@
     <div>
 
     </div>
+  <form th:action="@{/MatchMyduo/enroll}" method="POST">
     <div id="popup" class="hide layer">
     
             <div class="content">
@@ -91,131 +93,158 @@
                 <div class="form-group">
                     <label for="summoner-name">소환사 이름 (KR)</label>
                     <input type="text" id="summoner-name" placeholder="플레이어 이름 + #KR1" />
-                    <button class="register-button" onclick="findInfo()">정보등록</button>
+                    
+                    <input type="hidden" id="riot-name" name="riotName"/>
+                    <input type="hidden" id="riot-tag" name="riotTag"/>
+                    <input type="hidden" id="lol-tier" name="lolTier"/>
+                    <input type="hidden" id="lol-rank" name = "lolRank"/>
+                    <input type="hidden" id="lol-win" name = "lolWin"/>
+                    <input type="hidden" id="lol-lose" name = "lolLose"/>
+                    <button type="button"class="register-button" onclick="findInfo()">정보등록</button>
                 </div>
                 <div class="form-group">
                     <label>나의 포지션</label>
+                    <input type="hidden" id="my-position" name="myPosition"/>
                     <div class="positions">
-                        <button class="position-button">
+                        <button type="button" class="position-button">
                             <img src="/img/탑라인.svg" alt="">
                         </button>
-                        <button class="position-button">
+                        <button type="button" class="position-button">
                             <img src="/img/정글라인.svg" alt="Jungle">
                         </button>
-                        <button class="position-button">
+                        <button type="button" class="position-button">
                             <img src="/img/미드라인.svg" alt="Mid">
                         </button>
-                        <button class="position-button">
+                        <button type="button" class="position-button">
                             <img src="/img/바텀라인.svg" alt="Bot">
                         </button>
-                        <button class="position-button">
+                        <button type="button" class="position-button">
                             <img src="/img/서폿라인.svg" alt="Support">
                         </button>
-                        </div>
+                    </div>
                     <label>찾는 포지션</label>
+                    <input type="hidden" id="find-position" name="findPosition"/>
                     <div class="positions">
-                        <button class="find-position-button">
+                        <button type="button" class="find-position-button">
                             <img src="/img/탑라인.svg" alt="">
                         </button>
-                        <button class="find-position-button">
+                        <button type="button" class="find-position-button">
                             <img src="/img/정글라인.svg" alt="Jungle">
                         </button>
-                        <button class="find-position-button">
+                        <button type="button" class="find-position-button">
                             <img src="/img/미드라인.svg" alt="Mid">
                         </button>
-                        <button class="find-position-button">
+                        <button type="button" class="find-position-button">
                             <img src="/img/바텀라인.svg" alt="Bot">
                         </button>
-                        <button class="find-position-button">
+                        <button type="button" class="find-position-button">
                             <img src="/img/서폿라인.svg" alt="Support">
                         </button>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="queue-type">큐 타입</label>
-                    <select id="queue-type">
-                        <option value="solo">솔로랭크</option>
-                        <option value="flex">자유랭크</option>
+                    <select id="queue-type" name="queueType">
+                        <option value="솔로랭크">솔로랭크</option>
+                        <option value="자유랭크">자유랭크</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="memo">메모</label>
-                    <textarea id="memo" rows="3" placeholder="함께 할 DUO 파트너를 찾고 있어요."></textarea>
+                    <textarea name="partyContent" id="memo" rows="3" placeholder="함께 할 DUO 파트너를 찾고 있어요."></textarea>
                 </div>
                 <div class="form-group">
                     <div class="note">단어에 대한 모욕, 명예훼손, 성희롱 등의 행위는 신고 시 법적 처벌을 받을 수 있습니다.</div>
                 </div>
                 <div class="buttons">
-                    <button class="cancel-button" onclick="closePopup()">취소</button>
-                    <button class="register-button">등록</button>
+                    <button type="button" class="cancel-button" onclick="closePopup()">취소</button>
+                    <button type="submit" class="register-button" >등록</button>
                 </div>
             </div> 
     </div>
+ </form>
 
     <section class="post-section">
-        <div class="post">
+        <div th:each="post,iterStat : ${posts}"class="post">
             <div class="post-header">
                 <div class="user-info">
                     <img class="user-icon" src="user-icon.jpg" alt="User Icon">
                     <div>
-                        <h3>QUEEN</h3>
+                        <h3 th:text="${post.riotName}"></h3>
                         
                     </div>
                 </div>
             </div> 
             <div>
-                바텀
+                <p th:text="${post.myPosition}"></p>
             </div> 
             <div>
-                플레티넘
+                <p th:text="${post.lolTier}"></p>
+                <p th:text="${post.lolRank}"></p>
             </div>
             <div>
-                서폿
+                <p th:text="${post.findPosition}"></p>
             </div>
             <div>
                 이즈리얼
             </div>
             <div>
-                50%
+            	<p th:text="${#numbers.formatDecimal(post.lolWin/(post.lolWin+post.lolLose)*100,2,0)}"></p>
             </div>
             <div>
-                4.9
+                KDA
             </div>
             <div>
-                <p class="post-content">레버튼 장애로 진짜 불편합니다. 골드구간 전쟁</p>
+                <p class="post-content" th:text="${post.partyContent}"></p>
             </div>
             <div>
-                등록일시
+                <p th:text="${post.createdDate}"></p>
             </div>
         </div>
-
-        <div class="post">
-            <div class="post-header">
-                <div class="user-info">
-                    <img class="user-icon" src="user-icon2.jpg" alt="User Icon">
-                    <div>
-                        <h3>T1 Rose</h3>
-                        <span class="tier">G1</span>
-                    </div>
-                </div>
-                <span class="status">캐리 가능한 부캐입니다</span>
-            </div>
-            <div class="post-stats">
-                <div class="stat">
-                    <span class="stat-label">승률</span>
-                    <span class="stat-value">64%</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">KDA</span>
-                    <span class="stat-value">6.6 / 6.8 / 6.3</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">최근 선호 챔피언</span>
-                    <span class="stat-value">케이틀린</span>
-                </div>
-            </div>
-            <p class="post-content">빠르게 1승만 하실분</p>
-        </div>
+        <nav aria-label="Page navigation example"
+         style="background-color: white;"></nav>
+         <ul class="pagination" style="justify-content: center;">
+            <!--
+            	 왼쪽 버튼 
+            	 1. 1~10 페이지일 때 : 아무런 동작하지 않게
+            	 2. 11 페이지 이상일 때 : 직전 페이지 마지막(endPage)
+            	 3. 
+           	-->
+            <li class="page-item" style="margin-right: 0px">
+            	<a  class="page-link" th:if = "${pi.currentPage <= pi.pageLimit}" 
+            	th:href="@{/MatchMyduo/recruit(currentPage=1)}" aria-label="Previous"
+               		style="margin-right: 0px"> <span aria-hidden="true">&laquo;</span>
+           		 </a>
+             	<a  class="page-link" th:if = "${pi.currentPage > pi.pageLimit}" 
+             		th:href="@{/MatchMyduo/recruit(currentPage = ${pi.endPage - pi.pageLimit})}" 
+             		aria-label="Previous"
+               		style="margin-right: 0px"> <span aria-hidden="true">&laquo;</span>
+            	</a> 
+            </li>
+            <!-- 
+            	페이지 버튼
+             -->
+            <li class="page-item" style="margin-right: 0px"
+            	th:each = "page : ${#numbers.sequence(pi.startPage, pi.endPage)}">
+            	<a class="page-link" th:href="@{/MatchMyduo/recruit(currentPage=${page})}" 
+            	th:text="${page}" style="margin-right: 0px"></a>
+            </li>
+         
+            <!-- 
+            	오른쪽 버튼
+            	1. 끝 페이지일 때 : 아무런 동작을 하지 않아야 함 
+            -->
+            <li class="page-item" style="margin-right: 0px">
+            	<a  class="page-link" th:if = "${pi.endPage == pi.maxPage}" 
+            	th:href="@{/MatchMyduo/recruit(currentPage=${pi.endPage})}" aria-label="Next"> <span
+                	aria-hidden="true">&raquo;</span>
+            	</a>
+            	<a  class="page-link" th:if = "${pi.endPage != pi.maxPage}" 
+            		th:href="@{/MatchMyduo/recruit(currentPage = ${pi.endPage + 1})}" aria-label="Next"> <span
+                	aria-hidden="true">&raquo;</span>
+            	</a>
+            </li>
+         </ul>
     </section>
 
     

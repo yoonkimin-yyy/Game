@@ -19,15 +19,28 @@ $(document).mouseup(function (e) {
 });
 
 // 선택된 카테고리만 색변경
-document.querySelectorAll('.position-button').forEach(button => {
-    button.addEventListener('click', function() {
-        // 모든 버튼에서 selected 클래스 제거
-        document.querySelectorAll('.position-button').forEach(btn => {
-            btn.classList.remove('selected');
+document.addEventListener("DOMContentLoaded", function() {
+    // 모든 포지션 버튼 가져오기
+    const buttons = document.querySelectorAll(".position-button");
+    const input = document.getElementById("my-position");
+
+    // 버튼 클릭 시 이벤트 리스너 추가
+    buttons.forEach((button, index) => {
+        button.addEventListener("click", function() {
+            // 포지션 목록
+            const positions = ["탑", "정글", "미드", "바텀", "서폿"];
+            
+            // input 값 변경
+            input.value = positions[index];
+
+            // 모든 버튼 스타일 초기화
+            buttons.forEach(btn => btn.classList.remove("selected"));
+            
+            // 선택된 버튼 스타일 추가
+            this.classList.add("selected");
+
+            console.log("나의 포지션:", input.value); // 콘솔에서 확인 가능
         });
-        
-        // 클릭된 버튼에 selected 클래스 추가
-        this.classList.add('selected');
     });
 });
 
@@ -43,10 +56,28 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function(){
-    $('.find-position-button').click(function(){
-        $('.find-position-button').removeClass('selected');
+// 찾는 포지션
+document.addEventListener("DOMContentLoaded", function() {
+    // 모든 포지션 버튼 가져오기
+    const buttons = document.querySelectorAll(".find-position-button");
+    const input = document.getElementById("find-position");
 
-        $(this).addClass('selected');
+    // 버튼 클릭 시 이벤트 리스너 추가
+    buttons.forEach((button, index) => {
+        button.addEventListener("click", function() {
+            // 포지션 목록
+            const positions = ["탑", "정글", "미드", "바텀", "서폿"];
+            
+            // input 값 변경
+            input.value = positions[index];
+
+            // 모든 버튼 스타일 초기화
+            buttons.forEach(btn => btn.classList.remove("selected"));
+            
+            // 선택된 버튼 스타일 추가
+            this.classList.add("selected");
+
+            console.log("찾는 포지션:", input.value); // 콘솔에서 확인 가능
+        });
     });
 });
