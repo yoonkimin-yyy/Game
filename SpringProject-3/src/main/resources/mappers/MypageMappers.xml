@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+						"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="kr.co.green.mypage.mapper.MyPageMapper">
+
+<!-- <insert>
+	<selectKey keyProperty="MyPageDTO.no" resultType="int" order="BEFORE">
+		SELECT user_info_seq.NEXTVAL FROM dual
+	</selectKey>
+	
+	INSERT INTO user_info
+</insert> -->
+
+
+
+
+
+
+
+
+
+</mapper>
