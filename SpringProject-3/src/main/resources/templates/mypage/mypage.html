@@ -152,9 +152,14 @@
                             <div class="info-card2" id="card3">
                                 <!-- 사용자 프로필 -->
                                 <h3>사용자 프로필</h3>
-                                <form th:action="@{/upload}" method="post" 
+                                <form action="/upload" method="post" 
                                 			th:object="${fileDTO}" enctype="multipart/form-data">
-                                	<img id="uploadedImage" src="" alt="">
+                                	<img id="uploadedImage" 
+                                		th:src="@{{resourcesPath}/{folderNamePath}/{changeName}
+										(resourcesPath=${post.fileDTO.RESOURCES_PATH},
+										folderNamePath=${post.fileDTO.folderNamePath},
+										changeName=${post.fileDTO.changeName})}"
+										th:if="${post.fileDTO != null}"></img>
                						<input type="file" id="file" name="file">
                						<button type="submit" id="profile-img-button">업로드</button>
                					</form>

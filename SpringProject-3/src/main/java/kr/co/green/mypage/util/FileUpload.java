@@ -46,9 +46,5 @@ public void uploadFile(MultipartFile file, fileDTO fileDTO, String folderName) t
 		int dotIndex = fileName.lastIndexOf('.');
 		return dotIndex == -1 ? "":fileName.substring(dotIndex+1);
 	}
-	
-	public void deleteFile(String localPath,String folderName, String fileName) throws IOException {
-		Path path = Paths.get(localPath + "\\" + folderName + "\\" + fileName);
-		Files.delete(path);
-	}
 }
+	
