@@ -51,8 +51,14 @@
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            <div class="button">
-                                <a href="signup.html" class="btn">시작하기</a>
+                            <div class="button" th:if="${session.userNo == null}">
+                            	<a th:href="@{/MatchMyduo/register/signin}" class="btn">로그인</a>
+                            </div>
+                            <div class="button" th:if="${session.userNo == null}">
+                                <a th:href="@{/MatchMyduo/register/agree}" class="btn">시작하기</a>
+                            </div>
+                            <div class="button" th:if="${session.userNo != null}">
+                            	<a th:href="@{/MatchMyduo/logout}" class="btn">로그아웃</a>
                             </div>
                         </nav>
                         <!-- End Navbar -->

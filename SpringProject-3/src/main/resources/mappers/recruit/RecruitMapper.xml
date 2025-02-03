@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "kr.co.green.recruit.mapper.RecruitMapper">
+
+<resultMap id = "recruitResultMap" type = "kr.co.green.recruit.dto.RecruitDTO">
+	<result property="partyNo" column="party_no"></result>
+	<result property="partyContent" column="party_content"></result>
+	<result property="createdDate" column="created_at"></result>
+	<result property="riotName" column="riot_name"></result>
+	<result property="riotTag" column="riot_tag"></result>
+	<result property="lolTier" column="lol_tier"></result>
+	<result property="lolRank" column="lol_rank"></result>
+	<result property="lolWin" column="lol_win"></result>
+	<result property="lolLose" column="lol_lose"></result>
+	<result property="queueType" column="queueType"></result>
+	<result property="myPosition" column="my_position"></result>
+	<result property="findPosition" column="find_position"></result>
+	
+	<association property="registerDTO" javaType="kr.co.green.register.dto.RegisterDTO">
+		<result property="userNo" column="user_no"></result>
+	</association>
+</resultMap>
+
+
+<insert id="partyEnroll" parameterType = "kr.co.green.recruit.dto.RecruitDTO">
+	<selectKey keyProperty = "partyNo" resultType = "int" order = "BEFORE">
+		SELECT recruit_seq.nextval FROM dual
+	</selectKey>	
+	INSERT INTO recruit VALUES(#{partyNo},
+							   #{partyContent},
+							   SYSDATE,
+							   #{riotName},
+							   #{riotTag},
+							   #{lolTier},
+							   #{lolRank},
+							   #{lolWin},
+							   #{lolLose},
+							   #{queueType},
+							   #{myPosition},
+							   #{findPosition},
+							   #{registerDTO.userNo})
+</insert>
+
+<select id="recruit" resultMap="recruitResultMap">
+			SELECT
+			r.party_no,
+			r.party_content,
+			r.created_at,
+			r.riot_name,
+			r.riot_tag,
+			r.lol_tier,
+			r.lol_rank,
+			r.lol_win,
+			r.lol_lose,
+			r.queueType,
+			r.my_position,
+			r.find_position,
+			r.user_no
+			FROM recruit r
+			ORDER BY r.created_at desc
+</select>
+
+<select id="totalCount">
+ 	SELECT COUNT(*) FROM recruit
+</select>
+</mapper>

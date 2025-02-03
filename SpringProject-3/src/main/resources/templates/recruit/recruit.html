@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head th:replace = "~{fragments/common/head :: HeadFragment}"></head>
+<head>
+	<link rel="stylesheet" href="/css/recruit.css">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+	
+
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- /End Preloader -->
+
+    <!-- Start Header Area -->
+    <header th:replace = "~{fragments/common/header :: HeaderFragment}">
+       
+    </header>
+
+    <section class="about section" style="background-color: black; height: 350px;">
+        <div class="container">
+            <div class="row align-items-center">              
+                <div class="image wow fadeInLeft" data-wow-delay=".6s">
+                        <img src="/img/롤 구인구직사이트2.png" alt="#">
+                </div>                      
+            </div>
+        </div>  
+    </section>
+
+    <div class="filter-toolbar">
+        <button class="filter-button" data-filter="all">
+            <img class="filter-img" src="/img/상관없음.png" alt="">
+        </button>
+        <button class="filter-button" data-filter="option1">
+            <img class="filter-img" src="/img/탑라인.svg" alt="">
+        </button>
+        <button class="filter-button" data-filter="option2">
+            <img class="filter-img" src="/img/정글라인.svg" alt="">
+        </button>
+        <button class="filter-button" data-filter="option3">
+            <img class="filter-img" src="/img/미드라인.svg" alt="">
+        </button>
+        <button class="filter-button" data-filter="option4">
+            <img class="filter-img" src="/img/바텀라인.svg" alt="">
+        </button>
+        <button class="filter-button" data-filter="option5">
+            <img class="filter-img" src="/img/서폿라인.svg" alt="">
+        </button>
+
+        <div class="dropdown-container">
+            
+                
+                <select id="solo-rank" class="dropdown-select">
+                    <option value="option1">솔로랭크</option>
+                    <option value="option2">자유랭크</option>
+                    <option value="option3">빠른대전</option>
+                </select>
+            
+            
+                <select id="tier" class="dropdown-select">
+                    <option value="optionA">티어 전체</option>
+                    <option value="optionB">언랭크</option>
+                    <option value="optionC">아이언</option>
+                    <option value="optionD">브론즈</option>
+                    <option value="optionE">실버</option>
+                    <option value="optionF">골드</option>
+                    <option value="optionG">플레티넘</option>
+                    <option value="optionH">에메랄드</option>
+                    <option value="optionI">다이아</option>
+                    <option value="optionJ">마스터</option>
+                </select>
+            
+        </div>
+
+        <button onclick="showPopup()" class="enroll-button">DUO 구하기</button>
+    </div>
+
+    <div>
+
+    </div>
+  <form th:action="@{/MatchMyduo/enroll}" method="POST">
+    <div id="popup" class="hide layer">
+    
+            <div class="content">
+                <div class="modal-header">글 쓰고 DUO 찾기</div>
+                <div class="form-group">
+                    <label for="summoner-name">소환사 이름 (KR)</label>
+                    <input type="text" id="summoner-name" placeholder="플레이어 이름 + #KR1" />
+                    
+                    <input type="hidden" id="riot-name" name="riotName"/>
+                    <input type="hidden" id="riot-tag" name="riotTag"/>
+                    <input type="hidden" id="lol-tier" name="lolTier"/>
+                    <input type="hidden" id="lol-rank" name = "lolRank"/>
+                    <input type="hidden" id="lol-win" name = "lolWin"/>
+                    <input type="hidden" id="lol-lose" name = "lolLose"/>
+                    <button type="button"class="register-button" onclick="findInfo()">정보등록</button>
+                </div>
+                <div class="form-group">
+                    <label>나의 포지션</label>
+                    <input type="hidden" id="my-position" name="myPosition"/>
+                    <div class="positions">
+                        <button type="button" class="position-button">
+                            <img src="/img/탑라인.svg" alt="">
+                        </button>
+                        <button type="button" class="position-button">
+                            <img src="/img/정글라인.svg" alt="Jungle">
+                        </button>
+                        <button type="button" class="position-button">
+                            <img src="/img/미드라인.svg" alt="Mid">
+                        </button>
+                        <button type="button" class="position-button">
+                            <img src="/img/바텀라인.svg" alt="Bot">
+                        </button>
+                        <button type="button" class="position-button">
+                            <img src="/img/서폿라인.svg" alt="Support">
+                        </button>
+                    </div>
+                    <label>찾는 포지션</label>
+                    <input type="hidden" id="find-position" name="findPosition"/>
+                    <div class="positions">
+                        <button type="button" class="find-position-button">
+                            <img src="/img/탑라인.svg" alt="">
+                        </button>
+                        <button type="button" class="find-position-button">
+                            <img src="/img/정글라인.svg" alt="Jungle">
+                        </button>
+                        <button type="button" class="find-position-button">
+                            <img src="/img/미드라인.svg" alt="Mid">
+                        </button>
+                        <button type="button" class="find-position-button">
+                            <img src="/img/바텀라인.svg" alt="Bot">
+                        </button>
+                        <button type="button" class="find-position-button">
+                            <img src="/img/서폿라인.svg" alt="Support">
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="queue-type">큐 타입</label>
+                    <select id="queue-type" name="queueType">
+                        <option value="솔로랭크">솔로랭크</option>
+                        <option value="자유랭크">자유랭크</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="memo">메모</label>
+                    <textarea name="partyContent" id="memo" rows="3" placeholder="함께 할 DUO 파트너를 찾고 있어요."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="note">단어에 대한 모욕, 명예훼손, 성희롱 등의 행위는 신고 시 법적 처벌을 받을 수 있습니다.</div>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="cancel-button" onclick="closePopup()">취소</button>
+                    <button type="submit" class="register-button" >등록</button>
+                </div>
+            </div> 
+    </div>
+ </form>
+
+    <section class="post-section">
+        <div th:each="post,iterStat : ${posts}"class="post">
+            <div class="post-header">
+                <div class="user-info">
+                    <img class="user-icon" src="user-icon.jpg" alt="User Icon">
+                    <div>
+                        <h3 th:text="${post.riotName}"></h3>
+                        
+                    </div>
+                </div>
+            </div> 
+            <div>
+                <p th:text="${post.myPosition}"></p>
+            </div> 
+            <div>
+                <p th:text="${post.lolTier}"></p>
+                <p th:text="${post.lolRank}"></p>
+            </div>
+            <div>
+                <p th:text="${post.findPosition}"></p>
+            </div>
+            <div>
+                이즈리얼
+            </div>
+            <div>
+            	<p th:text="${#numbers.formatDecimal(post.lolWin/(post.lolWin+post.lolLose)*100,2,0)}"></p>
+            </div>
+            <div>
+                KDA
+            </div>
+            <div>
+                <p class="post-content" th:text="${post.partyContent}"></p>
+            </div>
+            <div>
+                <p th:text="${post.createdDate}"></p>
+            </div>
+        </div>
+        <nav aria-label="Page navigation example"
+         style="background-color: white;"></nav>
+         <ul class="pagination" style="justify-content: center;">
+            <!--
+            	 왼쪽 버튼 
+            	 1. 1~10 페이지일 때 : 아무런 동작하지 않게
+            	 2. 11 페이지 이상일 때 : 직전 페이지 마지막(endPage)
+            	 3. 
+           	-->
+            <li class="page-item" style="margin-right: 0px">
+            	<a  class="page-link" th:if = "${pi.currentPage <= pi.pageLimit}" 
+            	th:href="@{/MatchMyduo/recruit(currentPage=1)}" aria-label="Previous"
+               		style="margin-right: 0px"> <span aria-hidden="true">&laquo;</span>
+           		 </a>
+             	<a  class="page-link" th:if = "${pi.currentPage > pi.pageLimit}" 
+             		th:href="@{/MatchMyduo/recruit(currentPage = ${pi.endPage - pi.pageLimit})}" 
+             		aria-label="Previous"
+               		style="margin-right: 0px"> <span aria-hidden="true">&laquo;</span>
+            	</a> 
+            </li>
+            <!-- 
+            	페이지 버튼
+             -->
+            <li class="page-item" style="margin-right: 0px"
+            	th:each = "page : ${#numbers.sequence(pi.startPage, pi.endPage)}">
+            	<a class="page-link" th:href="@{/MatchMyduo/recruit(currentPage=${page})}" 
+            	th:text="${page}" style="margin-right: 0px"></a>
+            </li>
+         
+            <!-- 
+            	오른쪽 버튼
+            	1. 끝 페이지일 때 : 아무런 동작을 하지 않아야 함 
+            -->
+            <li class="page-item" style="margin-right: 0px">
+            	<a  class="page-link" th:if = "${pi.endPage == pi.maxPage}" 
+            	th:href="@{/MatchMyduo/recruit(currentPage=${pi.endPage})}" aria-label="Next"> <span
+                	aria-hidden="true">&raquo;</span>
+            	</a>
+            	<a  class="page-link" th:if = "${pi.endPage != pi.maxPage}" 
+            		th:href="@{/MatchMyduo/recruit(currentPage = ${pi.endPage + 1})}" aria-label="Next"> <span
+                	aria-hidden="true">&raquo;</span>
+            	</a>
+            </li>
+         </ul>
+    </section>
+
+    
+    
+
+    <footer th:replace = "~{fragments/common/footer :: FooterFragment}">
+        
+    </footer>
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/tiny-slider.js"></script>
+    <script src="/js/glightbox.min.js"></script>
+    <script src="/js/count-up.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/recruit.js"></script>
+    <script src="/js/riotinfo.js"></script>
+    
+    <script>
+        //========= testimonial 
+        tns({
+            container: '.testimonial-slider',
+            items: 3,
+            slideBy: 'page',
+            autoplay: false,
+            mouseDrag: true,
+            gutter: 0,
+            nav: true,
+            controls: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 1,
+                },
+                768: {
+                    items: 2,
+                },
+                992: {
+                    items: 2,
+                },
+                1170: {
+                    items: 3,
+                }
+            }
+        });
+
+        //====== counter up 
+        var cu = new counterUp({
+            start: 0,
+            duration: 2000,
+            intvalues: true,
+            interval: 100,
+            append: " ",
+        });
+        cu.start();
+    </script>
+</html>
+
+
+

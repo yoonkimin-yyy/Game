@@ -12,9 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RegisterDTO {
-
-	
-	
 	private int userNo;           // USER_NO: 사용자 고유 번호
     private String userName;       // USER_NAME: 사용자 이름
     private String nickName;       // NICK_NAME: 닉네임
