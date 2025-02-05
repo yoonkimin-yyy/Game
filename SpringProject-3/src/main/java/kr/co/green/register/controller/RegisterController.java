@@ -1,3 +1,4 @@
+
 package kr.co.green.register.controller;
 
 import org.springframework.stereotype.Controller;
@@ -103,13 +104,7 @@ public class RegisterController {
 	// 로그인
 	@PostMapping("/signin")
 	public String signIn(RegisterDTO registerDTO, HttpSession session ) {
-	
-		
-		
 		RegisterDTO loginUser = registerService.signIn(registerDTO);
-		
-		
-		
 		if(loginUser != null) {
 			session.setAttribute("userNo", loginUser.getUserNo());
 			session.setAttribute("userId", loginUser.getUserId());

@@ -41,8 +41,10 @@ dependencies {
    
    implementation 'org.springframework.boot:spring-boot-starter-security:3.4.1'
    
-   implementation 'org.springframework.boot:spring-boot-starter-websocket' // 채팅쪽 웹소켓
-   
+ implementation 'org.springframework.boot:spring-boot-starter-websocket'
+   implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
    implementation 'net.nurigo:sdk:4.3.0' // 쿨sms
    
    annotationProcessor 'org.projectlombok:lombok'
