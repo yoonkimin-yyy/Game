@@ -41,7 +41,7 @@
                                             data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
                                             aria-expanded="false" aria-label="Toggle navigation">파티</a>
                                         <ul class="sub-menu collapse" id="submenu-1-2">
-                                            <li class="nav-item"><a href="blog-grid.html">실시간 채팅</a>
+                                            <li class="nav-item"><a th:href="@{/chat/page}">실시간 채팅</a>
                                             </li>
                                             <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>
                                         </ul>
@@ -51,8 +51,14 @@
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            <div class="button">
-                                <a href="signup.html" class="btn">시작하기</a>
+                            <div class="button" th:if="${session.userNo == null}">
+                            	<a th:href="@{/MatchMyduo/register/signin}" class="btn">로그인</a>
+                            </div>
+                            <div class="button" th:if="${session.userNo == null}">
+                                <a th:href="@{/MatchMyduo/register/agree}" class="btn">시작하기</a>
+                            </div>
+                            <div class="button" th:if="${session.userNo != null}">
+                            	<a th:href="@{/MatchMyduo/logout}" class="btn">로그아웃</a>
                             </div>
                         </nav>
                         <!-- End Navbar -->

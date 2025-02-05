@@ -14,8 +14,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
 	@Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/chatroom"); // 클라이언트가 메시지를 구독할 경로
-        config.setApplicationDestinationPrefixes("/chat"); // 클라이언트가 메시지를 보낼 때 사용하는 경로
+        config.enableSimpleBroker("/chatroom", "queue"); // 클라이언트가 메시지를 구독할 경로
+        config.setApplicationDestinationPrefixes("/chat/app"); // 클라이언트가 메시지를 보낼 때 사용하는 경로
     }
 	 @Override
 	    public void registerStompEndpoints(StompEndpointRegistry registry) {

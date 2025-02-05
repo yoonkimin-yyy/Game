@@ -90,7 +90,7 @@ public class RegisterController {
 		
 	}
 	
-	@PostMapping("register/form")
+	@PostMapping("/register/form")
 	public String register() {
 		
 		return "register/signup";
@@ -103,13 +103,7 @@ public class RegisterController {
 	// 로그인
 	@PostMapping("/signin")
 	public String signIn(RegisterDTO registerDTO, HttpSession session ) {
-	
-		
-		
 		RegisterDTO loginUser = registerService.signIn(registerDTO);
-		
-		
-		
 		if(loginUser != null) {
 			session.setAttribute("userNo", loginUser.getUserNo());
 			session.setAttribute("userId", loginUser.getUserId());

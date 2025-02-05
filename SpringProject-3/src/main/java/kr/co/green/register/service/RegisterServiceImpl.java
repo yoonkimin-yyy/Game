@@ -62,7 +62,7 @@ public class RegisterServiceImpl  implements RegisterService{
 	   
 	   RegisterDTO loginUser = registerMapper.signIn(registerDTO);
 	   
-	   System.out.println(loginUser.getUserPassword());
+	  
 	   
 	   
 	   if(passwordEncoder.matches(registerDTO.getUserPassword(),loginUser.getUserPassword())) {

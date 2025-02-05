@@ -1,8 +1,13 @@
 package kr.co.green.chatting.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,47 +21,56 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.green.chatmessage.dto.ChatMessageDTO;
 import kr.co.green.chatting.service.ChatService;
 
-
-
 @Controller
 @RequestMapping("/chat")
 public class ChatController {
 
 	private final ChatService chatService;
 	private final SimpMessagingTemplate messagingTemplate;
-	
-	public ChatController(ChatService chatService,SimpMessagingTemplate messagingTemplate) {
+
+	public ChatController(ChatService chatService, SimpMessagingTemplate messagingTemplate) {
 		this.chatService = chatService;
 		this.messagingTemplate = messagingTemplate;
 	}
+
 	@GetMapping("/page")
-	public String chatPage() {
-	    return "chat";  
+	public String chatPage(Model model) {
+		List<String> allUsers = chatService.getAllUserIds();
+		
+		model.addAttribute("chatRooms", allUsers);
+		
+		return "chat/chat";
 	}
-	
+	@PostMapping("/joinRoom")
+	@ResponseBody
+	public ResponseEntity<?> joinChatRoom(@RequestBody ChatMessageDTO request){
+		Integer roomId = chatService.findOrCreateRoom(request.getSender(), request.getReceiver());
+		
+		Map<String, Object> response = new HashMap<>();
+		if (roomId != null) {  
+	        response.put("success", true);
+	        response.put("roomId", roomId);
+	        return ResponseEntity.ok(response);
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "채팅방 생성 실패");
+	        return ResponseEntity.badRequest().body(response);
+	    }
+	}
+
 	// 1️. WebSocket을 통해 메시지 전송
 	@MessageMapping("/sendMessage")
-    public void sendMessage(ChatMessageDTO chatMessageDTO) {
-        chatService.saveChatMessage(chatMessageDTO);
-        messagingTemplate.convertAndSend("/chatroom/" + chatMessageDTO.getRoomId(), chatMessageDTO);
-    }
-	
-	// 2️. 특정 사용자의 채팅 내역 조회
-	@GetMapping("/history/user/{user}")
-	@ResponseBody
-	public List<ChatMessageDTO> getChatHistoryByUser(@PathVariable String user) {
-        return chatService.getMessages(user);
-    }
-	
+	@SendTo("/chatroom/{roodId}")
+	public void sendMessage(ChatMessageDTO chatMessageDTO) {
+		chatService.saveChatMessage(chatMessageDTO);
+		messagingTemplate.convertAndSend("/chatroom/"+chatMessageDTO.getRoomId(), chatMessageDTO);
+	}
+
 	// 3️. 특정 채팅방의 모든 메시지 조회
-    @GetMapping("/history/room/{roomId}")
-    @ResponseBody
-    public List<ChatMessageDTO> getChatHistoryByRoom(@PathVariable int roomId) {
-        return chatService.getMessagesByRoomId(roomId);
-    }
-    @PostMapping("/sendMessage")
-    public ChatMessageDTO sendMessageAjax(@RequestBody ChatMessageDTO chatMessageDTO) {
-        chatService.saveChatMessage(chatMessageDTO);
-        return chatMessageDTO;
-    }
+	@GetMapping("/history/room/{roomId}")
+	@ResponseBody
+	public List<ChatMessageDTO> getChatHistoryByRoom(@PathVariable("roomId") int roomId) {
+		return chatService.getMessagesByRoomId(roomId);
+	}
+
 }

@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
   							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace=kr.co.green.chatmapper.ChatMapper>
+<mapper namespace="kr.co.green.chatmapper.ChatMapper">
 
 <resultMap id="chatResultMap" type="kr.co.green.chatmessage.dto.ChatMessageDTO">
 
-		<id property="messageId" column="message_id"/>
-        <result property="roomId" column="room_id"/>
-        <result property="sender" column="send_user_id"/>
-        <result property="receiver" column="receiver"/>
-        <result property="content" column="room_detail"/>
-        <result property="timeStamp" column="send_time"/>
+		<id property="messageId" column="message_id"></id>
+        <result property="roomId" column="room_id"></result>
+        <result property="sender" column="send_user_id"></result>
+        <result property="receiver" column="receiver"></result>
+        <result property="content" column="room_detail"></result>
+        <result property="timeStamp" column="send_time"></result>
+        <result property="messageType" column="message_type"></result>
         
 </resultMap>
 
- <!-- 메시지 저장 -->
-    <insert id="saveMessage" useGeneratedKeys="true" keyProperty="messageId">
-        INSERT INTO MESSENGER_detail (message_id, room_id, room_detail, send_time, send_user_id, message_type)
-        VALUES (messenger_seq.NEXTVAL, #{roomId}, #{content}, CURRENT_TIMESTAMP, #{sender}, 'TEXT')
-    </insert>
+	<insert id="saveMessage">
+	 INSERT INTO messenger_detail (message_id, room_id, room_detail, send_time, send_user_id, message_type)
+    	VALUES (messenger_seq.NEXTVAL, #{roomId}, #{content}, SYSTIMESTAMP, #{sender}, 'TEXT')
+    
+	</insert>
+ 
+ 	<select id="getAllUserIds" >
+ 		SELECT  user_id FROM USER_INFO
+ 	</select>
 
-    <!-- 특정 사용자의 채팅 내역 조회 -->
-    <select id="getMessageByUser" resultType="kr.co.green.chatmessage.dto.ChatMessageDTO">
-        SELECT 
-            md.message_id AS messageId,
-            md.room_id AS roomId,
-            md.room_detail AS content,
-            md.send_time AS timeStamp,
-            md.send_user_id AS sender
-        FROM MESSENGER_detail md
-        JOIN room_user ru ON md.room_id = ru.room_id
-        WHERE ru.user_id = #{user}
-        ORDER BY md.send_time ASC
-    </select>
+	<select id="findRoom">
+	  SELECT room_id from room_user WHERE user_id=#{sender}
+	  INTERSECT
+	  SELECT room_id from room_user WHERE user_id=#{receiver}
+	</select>
+	
+	<insert id="createChatRoom" parameterType="kr.co.green.chatmessage.dto.ChatMessageDTO">
+	
+		<selectKey keyProperty="roomId" resultType="int" order="BEFORE">
+		  SELECT messenger_seq.nextval FROM dual
+		</selectKey>
+		
+		INSERT INTO messenger VALUES(#{roomId})
+	</insert>
+	
+	
 
-    <!-- 특정 채팅방의 모든 메시지 조회 -->
-    <select id="getMessageByRoomId" resultType="kr.co.green.chatmessage.dto.ChatMessageDTO">
-        SELECT 
-            message_id AS messageId,
-            room_id AS roomId,
-            room_detail AS content,
-            send_time AS timeStamp,
-            send_user_id AS sender
-        FROM MESSENGER_detail
-        WHERE room_id = #{roomId}
-        ORDER BY send_time ASC
-    </select>
+	<insert id="insertRoomUser">
+	
+	<selectKey keyProperty="roomUserNo" resultType="int" order="BEFORE">
+		SELECT room_user_seq.nextval FROM dual
+	</selectKey>
+	
+	INSERT INTO room_user VALUES(#{roomUserNo},#{roomId},#{userId})
+	
+	</insert>
 
-
-
-
-
+	<select id="getMessageByUser">
+	 SELECT room_detail FROM messenger_detail
+	 WHERE send_user_id = #{userId}
+	</select>
+	
+	<select id="getMessageByRoomId" resultMap="chatResultMap">
+	SELECT room_detail,send_user_id  FROM messenger_detail
+	WHERE room_id = #{roomId}
+	ORDER BY send_time ASC
+	
+	</select>
 
 
 

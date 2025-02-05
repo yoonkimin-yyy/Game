@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <title>실시간 채팅</title>
     <link rel="stylesheet" href="/css/chat.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
+   
     <div class="container">
         <div class="chatroom-list">
-            <h3>채팅방 목록</h3>
+            <h3>전체 유저 목록</h3>
             <div class="chatroom-item"
-                 th:each="room : ${chatRooms}"
-                 th:text="${room.roomName}"
-                 th:data-room-id="${room.roomId}"
-                 onclick="joinRoom(this.getAttribute('data-room-id'))">
+                 th:each="userId : ${chatRooms}"
+                 th:text="${userId}"  
+                 th:data-user-id="${userId}"
+                 onclick="startChat(this.getAttribute('data-user-id'))">
             </div>
         </div>
         
@@ -23,13 +27,17 @@
             </div>
             
             <form id="chatForm">
-                <input id="chatInput" type="text" placeholder="메시지를 입력하세요..." autocomplete="off" required>
+                <input id="chatInput" type="text" placeholder="메시지를 입력하세요..."  required>
                 <button id="sendButton" type="submit">전송</button>
             </form>
         </div>
     </div>
-
+    
+    <input type="hidden" id="currentUserId" th:value="${session.userId}">
+    
     <script src="/js/chat.js"></script>
-    <script src="/js/Socket.js"></script>
+    
+    <script th:inline="javascript" src="/js/Socket.js"></script>
+    
 </body>
 </html>
