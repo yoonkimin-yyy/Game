@@ -16,8 +16,6 @@ import kr.co.green.register.dto.RegisterDTO;
 import kr.co.green.register.dto.SaveCodeDTO;
 import kr.co.green.register.mapper.SaveCodeMapper;
 import net.nurigo.sdk.NurigoApp;
-import net.nurigo.sdk.message.model.Message;
-import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Service
