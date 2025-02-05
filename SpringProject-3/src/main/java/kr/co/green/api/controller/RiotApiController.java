@@ -40,11 +40,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.co.green.recruit.dto.RecruitDTO;
+
 @RestController
 @RequestMapping("/api/riot")
 public class RiotApiController {
 
-    private static final String API_KEY = "RGAPI-aa92f6d5-3ded-4d57-b9f9-d9919e36d7e1"; // API 키 적용
+    private static final String API_KEY = "RGAPI-0ba3a3c8-7ea3-46f5-95c9-1bb4a4e27ccc"; // API 키 적용
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -52,8 +57,10 @@ public class RiotApiController {
     @GetMapping("/account/{gameName}/{tagLine}")
     public ResponseEntity<String> getSummonerInfo(@PathVariable("gameName") String gameName, @PathVariable("tagLine") String tagLine) {
         String url = String.format("https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s",
-                gameName, tagLine, API_KEY);
+                gameName, tagLine, API_KEY);  
+        
         return fetchFromRiotApi(url);
+        
     }
 
     // 🔹 2. PUUID를 기반으로 최근 경기 목록 가져오기
@@ -79,8 +86,12 @@ public class RiotApiController {
     public ResponseEntity<String> getLeagueEntries(@PathVariable("summonerId") String summonerId) {
     	HttpHeaders headers = new HttpHeaders(); headers.add("Accept","*/*");
     	HttpEntity<String> entity = new HttpEntity<String>("", headers);
-        String url = String.format("https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/%s?api_key=%s",
+        String url = String.format("https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/%s?queue=RANKED_SOLO_5x5&api_key=%s",
                 summonerId, API_KEY);
+        
+        System.out.println(summonerId);
+        
+        
         return requestTest(url, entity);
     }
     
@@ -93,6 +104,19 @@ public class RiotApiController {
     private ResponseEntity<String> fetchFromRiotApi(String url) {
         return restTemplate.getForEntity(url, String.class);
     }
+    
+
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
     
     
 }
