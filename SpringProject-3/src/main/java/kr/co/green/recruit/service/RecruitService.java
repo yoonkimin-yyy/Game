@@ -16,4 +16,9 @@ public interface RecruitService {
 									  int postCount,
 									  int pageLimit,
 									  int boardLimit);	
+	
+	
+	
+	
+	
 }

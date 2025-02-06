@@ -30,4 +30,6 @@ public class RecruitDTO {
 	private String myPosition;
 	private String findPosition;
 	private RegisterDTO registerDTO = new RegisterDTO();
+	
+	private String profileIconUrl;
 }

@@ -49,7 +49,7 @@ import kr.co.green.recruit.dto.RecruitDTO;
 @RequestMapping("/api/riot")
 public class RiotApiController {
 
-    private static final String API_KEY = "RGAPI-0ba3a3c8-7ea3-46f5-95c9-1bb4a4e27ccc"; // API 키 적용
+    private static final String API_KEY = "RGAPI-69e9e891-66cb-4b93-8ce2-83022ae2a952"; // API 키 적용
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -86,26 +86,33 @@ public class RiotApiController {
     public ResponseEntity<String> getLeagueEntries(@PathVariable("summonerId") String summonerId) {
     	HttpHeaders headers = new HttpHeaders(); headers.add("Accept","*/*");
     	HttpEntity<String> entity = new HttpEntity<String>("", headers);
-        String url = String.format("https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/%s?queue=RANKED_SOLO_5x5&api_key=%s",
+        String url = String.format("https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/%s?api_key=%s",
                 summonerId, API_KEY);
         
-        System.out.println(summonerId);
         
-        
-        return requestTest(url, entity);
+        ResponseEntity<String> response = requestTest(url, entity);
+        return response;
     }
     
     public ResponseEntity<String> requestTest(String url, HttpEntity<String> entity) {
     	ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
     	return response;
     }
+    
+    // PUUID 기반으로 소환사 아이콘 이미지 가져오기
+    @GetMapping("/profileIcon/{puuid}")
+    public ResponseEntity<String> getProfile(@PathVariable("puuid") String puuid) {
+    	String url = String.format("https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/%s?api_key=%s",
+    			puuid, API_KEY);
+    	return fetchFromRiotApi(url);
+    }
 
     // 공통 Riot API 요청 메서드
-    private ResponseEntity<String> fetchFromRiotApi(String url) {
+    public ResponseEntity<String> fetchFromRiotApi(String url) {
         return restTemplate.getForEntity(url, String.class);
     }
     
-
+    
     
 
     
