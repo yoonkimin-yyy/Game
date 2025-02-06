@@ -344,4 +344,21 @@ h3 {
 #tierImg {
 	width: 70px;
 	height: 70px;
+	text-align: center;
 }
+#position{
+	width: 30px;
+	height: 30px;
+}
+
+.tier {
+	text-align: center;
+}
+
+.user-info {
+	width: 300px;
+	margin-left: 30px;
+}
+
+
+
