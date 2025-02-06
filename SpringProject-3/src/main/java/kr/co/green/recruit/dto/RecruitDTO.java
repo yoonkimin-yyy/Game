@@ -1,5 +1,7 @@
 package kr.co.green.recruit.dto;
 
+import org.jetbrains.annotations.NotNull;
+
 import kr.co.green.register.dto.RegisterDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,10 +22,14 @@ public class RecruitDTO {
 	private String riotTag;
 	private String lolTier;
 	private String lolRank;
+	
 	private double lolWin;
+	
 	private double lolLose;
 	private String queueType;
 	private String myPosition;
 	private String findPosition;
 	private RegisterDTO registerDTO = new RegisterDTO();
+	
+	private String profileIconUrl;
 }

@@ -1,5 +1,4 @@
 
-
 function showPopup() {
     document.querySelector('#popup').classList.remove('hide');
 }
@@ -81,3 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+
+
+
