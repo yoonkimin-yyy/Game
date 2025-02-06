@@ -50,6 +50,7 @@ import kr.co.green.recruit.dto.RecruitDTO;
 public class RiotApiController {
 
 
+
     private static final String API_KEY = "RGAPI-85710f0e-e49c-4379-b387-54147c4fc275"; // API 키 적용
 
 

@@ -32,4 +32,8 @@ public class RecruitDTO {
 	private RegisterDTO registerDTO = new RegisterDTO();
 	
 	private String profileIconUrl;
+	private String tierIconUrl;
+	
+	
+
 }

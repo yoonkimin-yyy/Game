@@ -178,6 +178,7 @@
                 <p th:text="${post.myPosition}"></p>
             </div> 
             <div>
+            	<img id="tierImg" th:src="@{'/img/'+${post.lolTier}+'.png'}" alt="Rank Tier" />
                 <p th:text="${post.lolTier}"></p>
                 <p th:text="${post.lolRank}"></p>
             </div>
