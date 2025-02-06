@@ -44,23 +44,24 @@
 </insert>
 
 <select id="recruit" resultMap="recruitResultMap">
-			SELECT
-			r.party_no,
-			r.party_content,
-			r.created_at,
-			r.riot_name,
-			r.riot_tag,
-			r.lol_tier,
-			r.lol_rank,
-			r.lol_win,
-			r.lol_lose,
-			r.queueType,
-			r.my_position,
-			r.find_position,
-			r.user_no
-			FROM recruit r
-			ORDER BY r.created_at desc
-			OFFSET ${pi.offset} ROWS FETCH NEXT ${pi.limit} ROWS ONLY
+    SELECT
+            r.party_no,
+            r.party_content,
+            r.created_at,
+            r.riot_name,
+            r.riot_tag,
+            r.lol_tier,
+            r.lol_rank,
+            r.lol_win,
+            r.lol_lose,
+            r.queueType,
+            r.my_position,
+            r.find_position,
+            r.user_no
+        FROM recruit r
+        ORDER BY r.created_at DESC
+        OFFSET ${pi.offset} ROWS FETCH NEXT ${pi.limit} ROWS ONLY
+
 </select>
 
 <select id="totalCount">
