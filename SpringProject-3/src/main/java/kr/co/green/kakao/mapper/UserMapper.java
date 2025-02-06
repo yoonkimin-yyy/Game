@@ -18,5 +18,5 @@ public interface UserMapper {
     // USER_INFO에 사용자 추가
     void insertUser(RegisterDTO registerDTO);
 
-	
+    KakaoUserDTO loginKakaoId(@Param("kakaoId") String kakaoId);
 }

@@ -10,4 +10,7 @@ public interface UserService {
     //  카카오 회원가입 //
     void signupKakao(KakaoUserDTO kakaoUser);
 
+    // 카카오로 로그인
+    KakaoUserDTO signIn(String kakaoId);
+   
 }

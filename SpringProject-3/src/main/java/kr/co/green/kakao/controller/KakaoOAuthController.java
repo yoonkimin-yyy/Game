@@ -50,13 +50,13 @@ public class KakaoOAuthController {
 		String accessToken = kakaoOAuthService.getAccessToken(code);
 		KakaoUserDTO kakaoUser = kakaoOAuthService.getUserInfo(accessToken);
 		
-		System.out.println("--------------");
-		System.out.println(kakaoUser.getAccessToken());
-		System.out.println("--------------");
+		
 		// 기존 회원인지 확인
+		System.out.println(userService.findKakaoId(kakaoUser.getKakaoId()));
 		if(!userService.findKakaoId(kakaoUser.getKakaoId())) {
 			// 신규 회원이면 회원가입 진행
 			userService.signupKakao(kakaoUser);
+			
 		}
 		// session에 사용자 정보 저장
 		session.setAttribute("userId", kakaoUser.getKakaoId());
