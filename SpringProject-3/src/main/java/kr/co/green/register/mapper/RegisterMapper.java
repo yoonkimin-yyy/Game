@@ -1,6 +1,7 @@
 package kr.co.green.register.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import kr.co.green.register.dto.AgreeDTO;
 import kr.co.green.register.dto.RegisterDTO;
@@ -16,5 +17,8 @@ public interface RegisterMapper {
 	public int insertCheckDate(AgreeDTO agreeDTO);
 	public RegisterDTO signIn(RegisterDTO registerDTO);
 	void insertAgree(AgreeDTO agreeDTO);
+	
+	int insertKakaoUser();
+	int countByKakaoId(@Param("kakaoId") String kakaoId);
 }
 
