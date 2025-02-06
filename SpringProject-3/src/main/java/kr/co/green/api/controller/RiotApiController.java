@@ -44,7 +44,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api/riot")
 public class RiotApiController {
 
-    private static final String API_KEY = "RGAPI-aa92f6d5-3ded-4d57-b9f9-d9919e36d7e1"; // API 키 적용
+    private static final String API_KEY = "RGAPI-85710f0e-e49c-4379-b387-54147c4fc275"; // API 키 적용
 
     private final RestTemplate restTemplate = new RestTemplate();
 
