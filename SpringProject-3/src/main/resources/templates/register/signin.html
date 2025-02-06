@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace = "~{fragments/common/head :: HeadFragment}"></head>
-<head >
-   
-    <title></title>
+<head th:replace="~{fragments/common/head :: HeadFragment}"></head>
+<head>
+    <title>MatchMyDuo - Login</title>
     <link rel="stylesheet" href="/css/signin.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/signin.js"></script>
-    
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
+    <script>
+        //  카카오 JavaScript 키 설정 (문자열로 감싸야 함)
+        Kakao.init('bc4fcfd914b407e2489bf782697d47d4'); //  여기에 카카오 개발자 콘솔에서 복사한 자바스크립트 키 입력
+        console.log("Kakao SDK Initialized: ", Kakao.isInitialized());
+
+        function kakaoLogin() {
+            Kakao.Auth.authorize({
+                redirectUri: 'http://localhost:8080/kakao/callback' //  URI를 문자열로 감싸야 함
+            });
+        }
+    </script>
 </head>
-<header th:replace = "~{fragments/common/header :: HeaderFragment}"> </header>
+
+<header th:replace="~{fragments/common/header :: HeaderFragment}"></header>
+
 <body>
     <div class="login-container">
         <div class="logo">
-            <img src="/img/logo.png" alt="MatchMyDuo Logo"> <!-- Replace with your logo -->
+            <img src="/img/logo.png" alt="MatchMyDuo Logo">
         </div>
         <h1 class="login-title" style="color: white;">Log In to MatchMyDuo</h1>
+        
         <form th:action="@{/MatchMyduo/signin}" method="POST">
             <input type="text" class="input-field" placeholder="UserId or Email" name="userId" 
                    th:value="${userId}" maxlength="30" required>
@@ -27,12 +40,19 @@
             <span id="loginPassword"></span>
             <button type="submit" class="login-button" id="loginForm">Log In</button>
         </form>
-        <button class="kakao-button">Log In with Kakao</button>
+		<button class="kakao-button" type="button" onclick="kakaoLogin();">
+    <svg class="kakao-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+        <path fill="#3C1E1E" d="M12 0C5.37 0 0 4.26 0 9.5 0 12.7 2.24 15.53 5.64 17.17l-1.2 5.08c-.09.37.33.67.66.45l5.76-3.86c.36.03.73.06 1.11.06 6.63 0 12-4.26 12-9.5S18.63 0 12 0z"/>
+    </svg>
+    카카오 로그인
+</button>
+
         <div class="footer">
             Don't have an account? <a th:href="@{/register/signup}">Sign up here</a>
         </div>
     </div>
-   <footer th:replace = "~{fragments/common/footer :: FooterFragment}"></footer>
+
+    <footer th:replace="~{fragments/common/footer :: FooterFragment}"></footer>
     <!-- Start Footer Top -->
     
 <!--/ End Footer Area -->
@@ -49,6 +69,8 @@
  <script src="/js/imagesloaded.min.js"></script>
  <script src="/js/isotope.min.js"></script>
  <script src="/js/main.js"></script>
+ 
+ 
  
  <script>
 

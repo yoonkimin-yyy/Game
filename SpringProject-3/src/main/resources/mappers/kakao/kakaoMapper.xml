@@ -3,6 +3,26 @@
   							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.green.kakao.mapper.UserMapper">
 
+<resultMap id="RegisterResultMap" type="kr.co.green.register.dto.RegisterDTO">
+<result property="userNo" column="user_no"></result>
+<result property="userName" column="user_name"></result>
+<result property="nickName" column="nick_name"></result>
+<result property="userId" column="user_id"></result>
+<result property="userPassword" column="user_password"></result>
+<result property="userEmail" column="user_email"></result>
+<result property="userBirthday" column="user_birthday"></result>
+<result property="userAgency" column="user_agency"></result>
+<result property="userPhone" column="user_phone"></result>
+<result property="createDate" column="create_date"></result>
+<result property="roleEnum" column="role_enum"></result>
+<result property="userIntroduce" column="user_introduce"></result>
+<result property="userRiot" column="user_riot"></result>
+</resultMap>
+
+
+
+
+
 <select id="countByKakaoId" parameterType="String" resultType="Integer">
 
 SELECT user_no FROM SOCIAL_USER_INFO
@@ -35,6 +55,13 @@ WHERE social_id = #{kakaoId}
 
 </insert>
 
+<select id="loginKakaoId" resultMap="RegisterResultMap" parameterType="String">
+	SELECT * FROM social_user_info
+	JOIN user_info ON
+	user_info.user_no = social_user_info.user_no
+	WHERE social_user_info.social_id = #{kakaoId}
+	
 
+</select>
 
 </mapper>

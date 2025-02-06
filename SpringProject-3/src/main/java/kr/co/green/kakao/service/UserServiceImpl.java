@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	public boolean findKakaoId(String kakaoId) {
 		
 		return Optional.ofNullable(userMapper.countByKakaoId(kakaoId)).orElse(0) > 0;
-}
+	}
 	//(USER_INFO + SOCIAL_USER_INFO 저장)
 	@Transactional
 	@Override
@@ -54,7 +54,10 @@ public class UserServiceImpl implements UserService {
 		userMapper.insertKakaoUser(kakaoUser);
 	
 	}
-	
+	@Override
+	public KakaoUserDTO signIn(String kakaoId) {
+		return userMapper.loginKakaoId(kakaoId);
+	}
 	
 	
 	
