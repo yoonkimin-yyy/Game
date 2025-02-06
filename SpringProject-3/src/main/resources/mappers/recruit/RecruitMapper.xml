@@ -60,6 +60,7 @@
 			r.user_no
 			FROM recruit r
 			ORDER BY r.created_at desc
+			OFFSET ${pi.offset} ROWS FETCH NEXT ${pi.limit} ROWS ONLY
 </select>
 
 <select id="totalCount">

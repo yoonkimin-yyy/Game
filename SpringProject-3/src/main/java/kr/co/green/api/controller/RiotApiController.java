@@ -49,7 +49,7 @@ import kr.co.green.recruit.dto.RecruitDTO;
 @RequestMapping("/api/riot")
 public class RiotApiController {
 
-    private static final String API_KEY = "RGAPI-69e9e891-66cb-4b93-8ce2-83022ae2a952"; // API 키 적용
+    private static final String API_KEY = "RGAPI-5b1036a8-f763-47c3-80e9-23ca468aad6f"; // API 키 적용
 
     private final RestTemplate restTemplate = new RestTemplate();
 
