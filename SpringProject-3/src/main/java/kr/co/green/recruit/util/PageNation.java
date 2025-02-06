@@ -37,8 +37,8 @@ public class PageNation {
 		
 		int row= listCount - (currentPage - 1)*boardLimit;
 		
-		int offset = (currentPage - 1) * boardLimit + 1;
-		int limit = offset + boardLimit - 1;
+		int offset = (currentPage - 1) * boardLimit;
+		int limit = offset + boardLimit;
 		
 		if(endPage>maxPage) {
 			endPage = maxPage;

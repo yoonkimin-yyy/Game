@@ -81,6 +81,69 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+$(document).ready(function() {
+    let currentPage = 2; // 현재 페이지
+    let isLoading = false; // 데이터 로딩 중인지 여부
+
+    function loadMorePosts() {
+        if (isLoading) return;
+        isLoading = true;
+		console.log("Loading more posts...");
+        $('#loading').show(); // 로딩 표시
+
+        $.ajax({
+            url: '/MatchMyduo/api/recruit',
+            type: 'GET',
+            data: { currentPage: currentPage },
+            success: function(response) {
+				console.log(response);
+                let posts = response.posts;
+                let postContainer = $('.post-section');
+
+                if (posts.length === 0) {
+                    $(window).off("scroll"); // 더 이상 로드할 데이터가 없으면 스크롤 이벤트 제거
+                    $('#loading').hide();
+                    return;
+                }
+
+                posts.forEach(post => {
+					console.log("Adding post:",post);
+                    let postHtml = `
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="user-info">
+                                    <img src="${post.profileIconUrl}" id="summoner-icon" alt="소환사 아이콘">
+                                    <h3>${post.riotName} # ${post.riotTag}</h3>
+                                </div>
+                            </div>
+                            <p>포지션: ${post.myPosition}</p>
+                            <p>찾는 포지션: ${post.findPosition}</p>
+                            <p>티어: ${post.lolTier} (${post.lolRank})</p>
+                            <p>승률: ${((post.lolWin / (post.lolWin + post.lolLose)) * 100).toFixed(2)}%</p>
+                            <p class="post-content">${post.partyContent}</p>
+                            <p>작성일: ${post.createdDate}</p>
+                        </div>
+                    `;
+                    postContainer.append(postHtml);
+                });
+
+                currentPage++; // 페이지 증가
+                isLoading = false;
+                $('#loading').hide(); // 로딩 숨김
+            }
+        });
+    }
+
+    // 스크롤 이벤트 리스너 추가
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+            loadMorePosts();
+        }
+    });
+
+    // 페이지 로드 시 첫 데이터 로드
+    
+});
 
 // 소환사 프로필 이미지 가져오기
 

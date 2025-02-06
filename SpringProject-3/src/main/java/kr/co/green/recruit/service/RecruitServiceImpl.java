@@ -51,6 +51,7 @@ public class RecruitServiceImpl implements RecruitService {
 									 int postCount,
 									 int pageLimit,
 									 int boardLimit){
+		
 		PageInfoDTO pi = pageNation.getPageInfo(postCount, currentPage, pageLimit, boardLimit);
 		
 		List<RecruitDTO> posts = recruitMapper.recruit(pi); 

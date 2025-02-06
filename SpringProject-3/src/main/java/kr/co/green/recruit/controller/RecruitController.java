@@ -66,6 +66,10 @@ public class RecruitController {
 			item.setProfileIconUrl("http://ddragon.leagueoflegends.com/cdn/15.3.1/img/profileicon/" + profileIconId +".png");
 		}
 		
+		System.out.println("current Page: " + currentPage);
+		System.out.println("total posts: " + postCount);
+		System.out.println("posts retrievedL " + result.get(postsResult));
+		
 		model.addAttribute("posts",postsResult);
 		model.addAttribute("pi",piResult);
 		
@@ -75,6 +79,34 @@ public class RecruitController {
 		
 		return "recruit/recruit";
 	}
+	
+	@GetMapping("/api/recruit")
+    public ResponseEntity<Map<String, Object>> apiRecruit(
+        @RequestParam(value = "currentPage", defaultValue = "1") int currentPage) {
+
+        int boardLimit = 10;
+        Map<String, Object> result = recruitService.recruit(pageNation, currentPage, boardLimit, boardLimit, boardLimit);
+
+        // 🔴 [디버깅] 서버 응답이 정상적인지 확인
+        System.out.println("Current Page: " + currentPage);
+        System.out.println("Posts Retrieved: " + result.get("posts"));
+        
+        for(RecruitDTO item : (List<RecruitDTO>)result.get("posts")) {
+			 String getPuuidUrl = String.format("https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s",
+		                item.getRiotName(), item.getRiotTag(), API_KEY);  
+			ResponseEntity<String> getPuuidResponse = riotApiController.fetchFromRiotApi(getPuuidUrl);
+			String puuid = extractPuuidFromResponse(getPuuidResponse, "puuid");
+			
+			String getIconUrl = String.format("https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/%s?api_key=%s",
+	    			puuid, API_KEY);
+			ResponseEntity<String> getIconResponse = riotApiController.fetchFromRiotApi(getIconUrl);
+			String profileIconId = extractPuuidFromResponse(getIconResponse, "profileIconId");
+			
+			item.setProfileIconUrl("http://ddragon.leagueoflegends.com/cdn/15.3.1/img/profileicon/" + profileIconId +".png");
+		}
+
+        return ResponseEntity.ok(result);
+    }
 	
 	// 소환사 아이콘 이미지 가져오는 코드 추가
 	
