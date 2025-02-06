@@ -16,4 +16,5 @@ public interface RegisterService {
 	
 	public void saveVerificationCode(SaveCodeDTO saveCodeDTO); //인증번호 저장
 	
+	
 }

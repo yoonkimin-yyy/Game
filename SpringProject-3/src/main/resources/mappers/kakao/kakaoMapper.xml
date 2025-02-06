@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.green.kakao.mapper.UserMapper">
+
+<resultMap id="RegisterResultMap" type="kr.co.green.register.dto.RegisterDTO">
+<result property="userNo" column="user_no"></result>
+<result property="userName" column="user_name"></result>
+<result property="nickName" column="nick_name"></result>
+<result property="userId" column="user_id"></result>
+<result property="userPassword" column="user_password"></result>
+<result property="userEmail" column="user_email"></result>
+<result property="userBirthday" column="user_birthday"></result>
+<result property="userAgency" column="user_agency"></result>
+<result property="userPhone" column="user_phone"></result>
+<result property="createDate" column="create_date"></result>
+<result property="roleEnum" column="role_enum"></result>
+<result property="userIntroduce" column="user_introduce"></result>
+<result property="userRiot" column="user_riot"></result>
+</resultMap>
+
+
+
+
+
+<select id="countByKakaoId" parameterType="String" resultType="Integer">
+
+SELECT user_no FROM SOCIAL_USER_INFO
+WHERE social_id = #{kakaoId}
+
+</select>
+
+<insert id="insertUser" parameterType="kr.co.green.register.dto.RegisterDTO" keyColumn="USER_NO">
+ <selectKey keyProperty="userNo" resultType="int" order="BEFORE">
+  	SELECT user_info_seq.NEXTVAL FROM DUAL
+ </selectKey>
+ INSERT INTO USER_INFO VALUES(#{userNo},
+ 								null,
+ 								#{nickName},
+ 								#{userId,jdbcType=VARCHAR},
+ 								null,
+ 								#{userEmail},
+ 								null,
+ 								null,
+ 								null,
+ 								sysdate,
+ 								default,
+ 								null,
+ 								default)
+ 															
+</insert>
+<insert id="insertKakaoUser" parameterType="kr.co.green.kakao.dto.KakaoUserDTO">
+	INSERT INTO  social_user_info VALUES
+	(social_user_info_seq.nextval,#{userNo},#{kakaoId},#{socialProfile, jdbcType=VARCHAR},#{accessToken,jdbcType=VARCHAR},default,default)
+
+</insert>
+
+<select id="loginKakaoId" resultMap="RegisterResultMap" parameterType="String">
+	SELECT * FROM social_user_info
+	JOIN user_info ON
+	user_info.user_no = social_user_info.user_no
+	WHERE social_user_info.social_id = #{kakaoId}
+	
+
+</select>
+
+</mapper>
