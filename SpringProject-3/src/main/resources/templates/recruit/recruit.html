@@ -168,10 +168,9 @@
         <div th:each="post,iterStat : ${posts}"class="post">
             <div class="post-header">
                 <div class="user-info">
-                    <img class="user-icon" src="user-icon.jpg" alt="User Icon">
+                    <img id="summoner-icon" th:src="${post.profileIconUrl}" alt="소환사 아이콘">
                     <div>
-                        <h3 th:text="${post.riotName}"></h3>
-                        
+                        <h3 th:text="${post.riotName} + ' # ' + ${post.riotTag}"></h3>
                     </div>
                 </div>
             </div> 
@@ -186,7 +185,7 @@
                 <p th:text="${post.findPosition}"></p>
             </div>
             <div>
-                이즈리얼
+               
             </div>
             <div>
             	<p th:text="${#numbers.formatDecimal(post.lolWin/(post.lolWin+post.lolLose)*100,2,0)}"></p>
