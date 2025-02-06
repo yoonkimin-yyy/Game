@@ -80,7 +80,14 @@
             <input class="checkbox-hidden"  type="hidden" name="personalOption" th:value="${agreeDTO.personalOption}" ></input>
             <input class="checkbox-hidden"  type="hidden" name="realNameAgree" th:value="${agreeDTO.realNameAgree}" ></input>
         </form>
-        <button class="kakao-button">카카오로 회원가입</button>
+        <form action="/oauth/kakao" method="GET">
+       <button class="kakao-button" type="submit">
+    <svg class="kakao-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+        <path fill="#3C1E1E" d="M12 0C5.37 0 0 4.26 0 9.5 0 12.7 2.24 15.53 5.64 17.17l-1.2 5.08c-.09.37.33.67.66.45l5.76-3.86c.36.03.73.06 1.11.06 6.63 0 12-4.26 12-9.5S18.63 0 12 0z"/>
+    </svg>
+    카카오로 회원가입
+	</button>
+        </form>
         <div class="signup-footer">
             <p>이미 계정이 있으신가요? <a href="@{/MatchMyduo/register/signin}" class="login-button">로그인</a></p>
         </div>
@@ -93,11 +100,11 @@
     <i class="lni lni-chevron-up"></i>
 </a>
  <!-- ========================= JS here ========================= -->
-<<<<<<< HEAD
+
  <script src="/js/SmsService.js"></script>
-=======
-  <script src="/js/SmsService.js"></script>
->>>>>>> branch 'master' of https://github.com/yoonkimin-yyy/Game.git
+
+
+
  <script src="/js/bootstrap.min.js"></script>
  <script src="/js/wow.min.js"></script>
  <script src="/js/tiny-slider.js"></script>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  							"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.green.kakao.mapper.UserMapper">
+
+<select id="countByKakaoId" parameterType="String" resultType="Integer">
+
+SELECT user_no FROM SOCIAL_USER_INFO
+WHERE social_id = #{kakaoId}
+
+</select>
+
+<insert id="insertUser" parameterType="kr.co.green.register.dto.RegisterDTO" keyColumn="USER_NO">
+ <selectKey keyProperty="userNo" resultType="int" order="BEFORE">
+  	SELECT user_info_seq.NEXTVAL FROM DUAL
+ </selectKey>
+ INSERT INTO USER_INFO VALUES(#{userNo},
+ 								null,
+ 								#{nickName},
+ 								#{userId,jdbcType=VARCHAR},
+ 								null,
+ 								#{userEmail},
+ 								null,
+ 								null,
+ 								null,
+ 								sysdate,
+ 								default,
+ 								null,
+ 								default)
+ 															
+</insert>
+<insert id="insertKakaoUser" parameterType="kr.co.green.kakao.dto.KakaoUserDTO">
+	INSERT INTO  social_user_info VALUES
+	(social_user_info_seq.nextval,#{userNo},#{kakaoId},#{socialProfile, jdbcType=VARCHAR},#{accessToken,jdbcType=VARCHAR},default,default)
+
+</insert>
+
+
+
+</mapper>
