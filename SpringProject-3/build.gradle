@@ -41,7 +41,7 @@ dependencies {
    
    implementation 'org.springframework.boot:spring-boot-starter-security:3.4.1'
    
- implementation 'org.springframework.boot:spring-boot-starter-websocket'
+   implementation 'org.springframework.boot:spring-boot-starter-websocket'
    implementation 'org.springframework.boot:spring-boot-starter-web'
 
 
@@ -57,7 +57,13 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 	
+	//Webflux
+	implementation 'org.springframework.boot:spring-boot-starter-webflux' 
 	
+	//thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	
+	 implementation 'org.json:json:20210307'
 	
 	 
 	

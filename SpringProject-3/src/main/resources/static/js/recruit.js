@@ -82,5 +82,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// 소환사 프로필 이미지 가져오기
+
+
+
 
 
