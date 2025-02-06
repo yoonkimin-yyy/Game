@@ -54,6 +54,16 @@
     })
 }*/
 
+
+
+
+
+
+
+
+
+
+/* 여긴 원민이 형이 한 거 */
 function findInfo() {
     const inputText = document.getElementById('summoner-name');
     const [beforeHash, afterHash] = inputText.value.split('#');
@@ -69,6 +79,8 @@ function findInfo() {
     .done(function (msg) {
         console.log("Summoner Info:", msg);
         const puuid = msg.puuid;
+		
+
 
         // 🔹 2. PUUID로 최근 경기 목록 가져오기
         $.ajax({
