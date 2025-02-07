@@ -1453,7 +1453,7 @@ ol {
 ========================================*/
 .header {
   width: 100%;
-  background: #7E57FF;
+  background: transparent;
   position: absolute;
   width: 100%;
   left: 0;
