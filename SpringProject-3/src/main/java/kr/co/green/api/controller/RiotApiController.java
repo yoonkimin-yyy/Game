@@ -51,7 +51,7 @@ public class RiotApiController {
 
 
 
-    private static final String API_KEY = "RGAPI-85710f0e-e49c-4379-b387-54147c4fc275"; // API 키 적용
+    private static final String API_KEY = "RGAPI-a1db09f0-9356-4720-8c1b-e751ee8745a1"; // API 키 적용
 
 
     private final RestTemplate restTemplate = new RestTemplate();
