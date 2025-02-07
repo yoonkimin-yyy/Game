@@ -41,6 +41,9 @@ function showPopup2(abs) {
 	const contentText = abs.getElementsByClassName('post-content')[0];
 	document.getElementById('input-post-content').textContent = contentText.textContent;
 	
+	const tierImg = abs.getElementsByClassName('tier')[0];
+	document.getElementsByClassName('input-tier-img')[0].src = tierImg.src;
+	
 	
 	
 	
@@ -118,6 +121,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// 그래프 기능
+
+
 $(document).ready(function() {
     let currentPage = 2; // 현재 페이지
     let isLoading = false; // 데이터 로딩 중인지 여부
@@ -153,15 +159,33 @@ $(document).ready(function() {
                                     <h3 class="riot-name">${post.riotName} # ${post.riotTag}</h3>
                                 </div>
                             </div>
-							<img class="my-position-img" id="position" src="/img/${post.myPosition}라인.svg"/>
-                            <p class="my-position">포지션: ${post.myPosition}</p>
-							<img class="find-position-img"id="position" src="/img/${post.findPosition}라인.svg"/>
-                            <p class="find-position"찾는 포지션: ${post.findPosition}</p>
-							<img id="tierImg" src="/img/${post.lolTier}.png" alt="Rank Tier" />	
-                            <p>티어: ${post.lolTier} (${post.lolRank})</p>
-                            <p>승률: ${((post.lolWin / (post.lolWin + post.lolLose)) * 100).toFixed(2)}%</p>
-                            <p class="post-content">${post.partyContent}</p>
-                            <p>작성일: ${post.createdDate}</p>
+							<div class="position-div">
+								<div class="position-sub-div">
+									<img id="position" src="/img/${post.myPosition}라인.svg"/>
+                            		<p id="position">${post.myPosition}</p>
+								</div>
+							</div>
+							<div id="tier-div">
+								<img class="tier" id="tierImg" src="/img/${post.lolTier}.png" alt="Rank Tier" />	
+                            	<p class="tier">${post.lolTier}</p>
+								<p class="tier">${post.lolRank}</p>
+							</div>
+							<div class="position-div">
+								<div class="position-sub-div">
+									<img id="position" src="/img/${post.findPosition}라인.svg"/>
+                           			<p id="position">${post.findPosition}</p>
+								</div>
+							</div>
+							<div >
+								<canvas id="winLose" width="200" height="50"></canvas>
+                            	<p id="winLose1">${((post.lolWin / (post.lolWin + post.lolLose)) * 100).toFixed(0)}%</p>
+							</div>
+                            <div class="post-div">
+								<p class="post-content">${post.partyContent}</p>
+							</div>
+							<div class="date">
+                            	<p>${post.createdDate}</p>
+							</div>
                         </div>
                     `;
                     postContainer.append(postHtml);

@@ -174,30 +174,33 @@
                     </div>
                 </div>
             </div> 
-            <div>
-
-            	<img class="my-position-img" id="position" th:src="@{'/img/'+${post.myPosition}+'라인.svg'}"/>
-
-                <p class="my-position" th:text="${post.myPosition}"></p>
+            <div class="position-div">
+            	<div class="position-sub-div">
+            		<img class="my-position-img" id="position" th:src="@{'/img/'+${post.myPosition}+'라인.svg'}"/>
+                	<p class="my-position" id="position" th:text="${post.myPosition}"></p>
+                </div>
             </div> 
-            <div>
-            	<img id="tierImg" th:src="@{'/img/'+${post.lolTier}+'.png'}" alt="Rank Tier" />
+            <div id="tier-div">
+            	<img class="tier" id="tierImg" th:src="@{'/img/'+${post.lolTier}+'.png'}" alt="Rank Tier" />
                 <p class="tier" th:text="${post.lolTier}"></p>
-                <p class="tier" th:text="${post.lolRank}"></p>
+                <p class="tier" th:text="${post.lolRank}" id="tier-rank"></p>
             </div>
-            <div>
 
-            	<img class="find-position-img" id="position" th:src="@{'/img/'+${post.findPosition}+'라인.svg'}"/>
+            <div class="position-div">
+            	<div class="position-sub-div">
+            		<img class="find-position-img" id="position" th:src="@{'/img/'+${post.findPosition}+'라인.svg'}"/>
+                	<p class="find-position" id="position" th:text="${post.findPosition}"></p>
+  				</div>	          
 
-                <p class="find-position" th:text="${post.findPosition}"></p>
             </div>
             <div>
                
             </div>
             <div>
-            	<p th:text="${#numbers.formatDecimal(post.lolWin/(post.lolWin+post.lolLose)*100,2,0)}"></p>
+            	<canvas id="winLose" width="200" height="50"></canvas>
+            	<p id="winLose1" th:text="${#numbers.formatDecimal(post.lolWin/(post.lolWin+post.lolLose)*100,2,0)}+'%'"></p>
             </div>
-            <div>
+            <div class="post-div">
                 <p class="post-content" th:text="${post.partyContent}"></p>
             </div>
             <div class="date">
@@ -212,13 +215,18 @@
             <div class="content">
                 <div class="modal-header">파티모집</div>
                 <div class="form-group">
-                    <label for="summoner-name">소환사 이름 (KR)</label>
-                <div class="user-info">
-                    <img class="input-summoner-icon" id="summoner-icon" src="" alt="소환사 아이콘">
-                    <div>
-                        <h3 style="color:white" id="input-riot-name"></h3>
+                	
+                    	
+                	<div class="user-info" style="display:block;">
+                		<p>소환사 이름 (KR)</p>
+                    	<img style="display:inline-block;" class="input-summoner-icon" id="summoner-icon" src="" alt="소환사 아이콘">
+                    	<div>
+                        	<h3 style="color:white; display:inline-block;" id="input-riot-name"></h3>
+                		</div>
                     </div>
-                </div>
+                    	
+       					
+                	
                     
                     <input type="hidden" id="riot-name" name="riotName"/>
                     <input type="hidden" id="riot-tag" name="riotTag"/>
@@ -226,7 +234,7 @@
                     <input type="hidden" id="lol-rank" name = "lolRank"/>
                     <input type="hidden" id="lol-win" name = "lolWin"/>
                     <input type="hidden" id="lol-lose" name = "lolLose"/>
-                    
+       
                 </div>
                 <div class="form-group">
                     <label>나의 포지션</label>
@@ -243,7 +251,7 @@
                 </div>
                 <div class="form-group">
                     <label for="memo">메모</label>
-                    <p style="color: white" id='input-post-content' class="post-content" text=""></p>
+                    <p style="width:600px; color: white; background-color: #2F2F2F;" id='input-post-content' class="post-content" text=""></p>
                 </div>
                 <div class="form-group">
                     <div class="note">단어에 대한 모욕, 명예훼손, 성희롱 등의 행위는 신고 시 법적 처벌을 받을 수 있습니다.</div>

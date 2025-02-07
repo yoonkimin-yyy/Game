@@ -158,6 +158,7 @@
 .form-group {
     margin-bottom: 15px;
     width: 100%;
+    
 }
 
 .form-group label {
@@ -372,20 +373,62 @@ h3 {
 #tierImg {
 	width: 70px;
 	height: 70px;
-	text-align: center;
 }
 #position{
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
+	text-align: center;
 }
 
 .tier {
 	text-align: center;
+	display: inline;
 }
 
 .user-info {
 	width: 300px;
-	margin-left: 30px;
+	margin-left: 0px;
+}
+#tier-div {
+	width: 100px;
+	height: 100px;
+	text-align: center;
+}
+
+#tier-rank {
+	margin-top: -15px;
+}
+
+.date {
+	display: flex;         /* Flexbox 레이아웃 사용 */
+    align-items: center;
+    margin-left: 10px;
+}
+.position-div {
+	display: flex;         /* Flexbox 레이아웃 사용 */
+    align-items: center;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#winLose1 {
+	text-align: center;
+}
+.post {
+	background-color: #fffff0;
+}
+.post p {
+	font-weight: 700;
+	color: #000000;
+}
+.post-content {
+	width: 150px;
+	background-color: #F5F5DC;
+	border-radius: 10px;
+}
+.post-div {
+	display: flex;         /* Flexbox 레이아웃 사용 */
+    align-items: center;
 }
 
 
