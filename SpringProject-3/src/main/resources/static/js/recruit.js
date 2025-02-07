@@ -19,37 +19,37 @@ $(document).mouseup(function (e) {
 
 function showPopup2(abs) {
     document.querySelector('#popup2').classList.remove('hide');
-	
-	const riotNameElement = abs.getElementsByClassName('riot-name')[0];	
-	document.getElementById('input-riot-name').textContent = riotNameElement.textContent;
-	
-	const myPositionElement = abs.getElementsByClassName('my-position')[0];
-	document.getElementById('input-my-position').textContent = myPositionElement.textContent;
-	
-	const findPositionElement = abs.getElementsByClassName('find-position')[0];
-	document.getElementById('input-find-position').textContent = findPositionElement.textContent;
-	
-	const summonerImg = abs.getElementsByClassName('summoner-icon')[0];
-	document.getElementsByClassName('input-summoner-icon')[0].src = summonerImg.src;
+   
+   const riotNameElement = abs.getElementsByClassName('riot-name')[0];   
+   document.getElementById('input-riot-name').textContent = riotNameElement.textContent;
+   
+   const myPositionElement = abs.getElementsByClassName('my-position')[0];
+   document.getElementById('input-my-position').textContent = myPositionElement.textContent;
+   
+   const findPositionElement = abs.getElementsByClassName('find-position')[0];
+   document.getElementById('input-find-position').textContent = findPositionElement.textContent;
+   
+   const summonerImg = abs.getElementsByClassName('summoner-icon')[0];
+   document.getElementsByClassName('input-summoner-icon')[0].src = summonerImg.src;
 
-	const myPositionImg = abs.getElementsByClassName('my-position-img')[0];
-	document.getElementsByClassName('input-my-position-img')[0].src = myPositionImg.src;
-	
-	const findPositionImg = abs.getElementsByClassName('find-position-img')[0];
-	document.getElementsByClassName('input-find-position-img')[0].src = findPositionImg.src;
-	
-	const contentText = abs.getElementsByClassName('post-content')[0];
-	document.getElementById('input-post-content').textContent = contentText.textContent;
-	
-	const tierImg = abs.getElementsByClassName('tier')[0];
-	document.getElementsByClassName('input-tier-img')[0].src = tierImg.src;
-	
-	
-	
-	
-	
-	
-	
+   const myPositionImg = abs.getElementsByClassName('my-position-img')[0];
+   document.getElementsByClassName('input-my-position-img')[0].src = myPositionImg.src;
+   
+   const findPositionImg = abs.getElementsByClassName('find-position-img')[0];
+   document.getElementsByClassName('input-find-position-img')[0].src = findPositionImg.src;
+   
+   const contentText = abs.getElementsByClassName('post-content')[0];
+   document.getElementById('input-post-content').textContent = contentText.textContent;
+   
+   const tierImg = abs.getElementsByClassName('tier')[0];
+   document.getElementsByClassName('input-tier-img')[0].src = tierImg.src;
+   
+   
+   
+   
+   
+   
+   
 }
 
 function closePopup2() {
@@ -131,7 +131,7 @@ $(document).ready(function() {
     function loadMorePosts() {
         if (isLoading) return;
         isLoading = true;
-		console.log("Loading more posts...");
+      console.log("Loading more posts...");
         $('#loading').show(); // 로딩 표시
 
         $.ajax({
@@ -139,7 +139,7 @@ $(document).ready(function() {
             type: 'GET',
             data: { currentPage: currentPage },
             success: function(response) {
-				console.log(response);
+            console.log(response);
                 let posts = response.posts;
                 let postContainer = $('.post-section');
 
@@ -150,7 +150,7 @@ $(document).ready(function() {
                 }
 
                 posts.forEach(post => {
-					console.log("Adding post:",post);
+               console.log("Adding post:",post);
                     let postHtml = `
                         <div onclick="showPopup2(this)" class="post wow fadeInUp" data-wow-delay=".6s">
                             <div class="post-header">
@@ -159,33 +159,33 @@ $(document).ready(function() {
                                     <h3 class="riot-name">${post.riotName} # ${post.riotTag}</h3>
                                 </div>
                             </div>
-							<div class="position-div">
-								<div class="position-sub-div">
-									<img id="position" src="/img/${post.myPosition}라인.svg"/>
-                            		<p id="position">${post.myPosition}</p>
-								</div>
-							</div>
-							<div id="tier-div">
-								<img class="tier" id="tierImg" src="/img/${post.lolTier}.png" alt="Rank Tier" />	
-                            	<p class="tier">${post.lolTier}</p>
-								<p class="tier">${post.lolRank}</p>
-							</div>
-							<div class="position-div">
-								<div class="position-sub-div">
-									<img id="position" src="/img/${post.findPosition}라인.svg"/>
-                           			<p id="position">${post.findPosition}</p>
-								</div>
-							</div>
-							<div >
-								<canvas id="winLose" width="200" height="50"></canvas>
-                            	<p id="winLose1">${((post.lolWin / (post.lolWin + post.lolLose)) * 100).toFixed(0)}%</p>
-							</div>
+                     <div class="position-div">
+                        <div class="position-sub-div">
+                           <img class="my-position-img" id="position" src="/img/${post.myPosition}라인.svg"/>
+                                  <p class="my-position" id="position">${post.myPosition}</p>
+                        </div>
+                     </div>
+                     <div id="tier-div">
+                        <img class="tier" id="tierImg" src="/img/${post.lolTier}.png" alt="Rank Tier" />   
+                               <p class="tier">${post.lolTier}</p>
+                        <p class="tier">${post.lolRank}</p>
+                     </div>
+                     <div class="position-div">
+                        <div class="position-sub-div">
+                           <img class="find-position-img" id="position" src="/img/${post.findPosition}라인.svg"/>
+                                    <p class="find-position" id="position">${post.findPosition}</p>
+                        </div>
+                     </div>
+                     <div >
+                        <canvas id="winLose" width="200" height="50"></canvas>
+                               <p id="winLose1">${((post.lolWin / (post.lolWin + post.lolLose)) * 100).toFixed(0)}%</p>
+                     </div>
                             <div class="post-div">
-								<p class="post-content">${post.partyContent}</p>
-							</div>
-							<div class="date">
-                            	<p>${post.createdDate}</p>
-							</div>
+                        <p class="post-content">${post.partyContent}</p>
+                     </div>
+                     <div class="date">
+                               <p>${post.createdDate}</p>
+                     </div>
                         </div>
                     `;
                     postContainer.append(postHtml);
