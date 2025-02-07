@@ -106,7 +106,10 @@
 	or user_email = #{userId}
 	
 	</select>
-		
+	<select id="findUserId" resultType="string">
+	SELECT user_id FROM USER_INFO
+	WHERE user_email = #{userEmail}
+	</select>		
 
 
 </mapper>
