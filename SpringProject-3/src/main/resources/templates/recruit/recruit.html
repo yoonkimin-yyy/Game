@@ -164,20 +164,20 @@
     </div>
  </form>
 
-    <section class="post-section">
-        <div th:each="post,iterStat : ${posts}"class="post">
+    <section  class="post-section">
+        <div onclick="showPopup2(this)" th:each="post,iterStat : ${posts}"class="post wow fadeInUp"  data-wow-delay=".6s">
             <div class="post-header">
                 <div class="user-info">
-                    <img id="summoner-icon" th:src="${post.profileIconUrl}" alt="소환사 아이콘">
+                    <img id="summoner-icon" class="summoner-icon" name="summoner-icon" th:src="${post.profileIconUrl}" alt="소환사 아이콘">
                     <div>
-                        <h3 th:text="${post.riotName} + ' # ' + ${post.riotTag}"></h3>
+                        <h3 class="riot-name" th:text="${post.riotName} + ' # ' + ${post.riotTag}"></h3>
                     </div>
                 </div>
             </div> 
             <div class="position-div">
             	<div class="position-sub-div">
-            		<img id="position" th:src="@{'/img/'+${post.myPosition}+'라인.svg'}"/>
-                	<p id="position" th:text="${post.myPosition}"></p>
+            		<img class="my-position-img" id="position" th:src="@{'/img/'+${post.myPosition}+'라인.svg'}"/>
+                	<p class="my-position" id="position" th:text="${post.myPosition}"></p>
                 </div>
             </div> 
             <div id="tier-div">
@@ -185,11 +185,13 @@
                 <p class="tier" th:text="${post.lolTier}"></p>
                 <p class="tier" th:text="${post.lolRank}" id="tier-rank"></p>
             </div>
+
             <div class="position-div">
             	<div class="position-sub-div">
-            		<img id="position" th:src="@{'/img/'+${post.findPosition}+'라인.svg'}"/>
-                	<p id="position" th:text="${post.findPosition}"></p>
+            		<img class="find-position-img" id="position" th:src="@{'/img/'+${post.findPosition}+'라인.svg'}"/>
+                	<p class="find-position" id="position" th:text="${post.findPosition}"></p>
   				</div>	          
+
             </div>
             <div>
                
@@ -205,7 +207,61 @@
                 <p th:text="${post.createdDate}"></p>
             </div>
         </div>
+        <div id="loading" style="text-align: center; display: none; height: 100px; font-size: 50px ">로딩 중...</div>
     </section>
+    
+    <div id="popup2" class="hide layer">
+    
+            <div class="content">
+                <div class="modal-header">파티모집</div>
+                <div class="form-group">
+                	
+                    	
+                	<div class="user-info" style="display:block;">
+                		<p>소환사 이름 (KR)</p>
+                    	<img style="display:inline-block;" class="input-summoner-icon" id="summoner-icon" src="" alt="소환사 아이콘">
+                    	<div>
+                        	<h3 style="color:white; display:inline-block;" id="input-riot-name"></h3>
+                		</div>
+                    </div>
+                    	
+       					
+                	
+                    
+                    <input type="hidden" id="riot-name" name="riotName"/>
+                    <input type="hidden" id="riot-tag" name="riotTag"/>
+                    <input type="hidden" id="lol-tier" name="lolTier"/>
+                    <input type="hidden" id="lol-rank" name = "lolRank"/>
+                    <input type="hidden" id="lol-win" name = "lolWin"/>
+                    <input type="hidden" id="lol-lose" name = "lolLose"/>
+       
+                </div>
+                <div class="form-group">
+                    <label>나의 포지션</label>
+                    <img class="input-my-position-img" id="position"src="/img/바텀라인.svg"/>
+                	<p id="input-my-position"></p>
+                	
+                    <label>찾는 포지션</label>
+                    <img class="input-find-position-img" id="position" src="/img/서폿라인.svg"/>
+                	<p id="input-find-position"></p>
+                </div>
+                <div class="form-group">
+                    <label for="queue-type">큐 타입</label>
+                    <h5 style="color: white">솔로랭크</h5>
+                </div>
+                <div class="form-group">
+                    <label for="memo">메모</label>
+                    <p style="width:600px; color: white; background-color: #2F2F2F;" id='input-post-content' class="post-content" text=""></p>
+                </div>
+                <div class="form-group">
+                    <div class="note">단어에 대한 모욕, 명예훼손, 성희롱 등의 행위는 신고 시 법적 처벌을 받을 수 있습니다.</div>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="cancel-button" onclick="closePopup2()">취소</button>
+                    <button type="submit" class="register-button" >파티가입</button>
+                </div>
+            </div> 
+    </div>
 
     
     
