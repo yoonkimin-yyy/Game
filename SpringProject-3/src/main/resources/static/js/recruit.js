@@ -116,9 +116,9 @@ $(document).ready(function() {
                                     <h3>${post.riotName} # ${post.riotTag}</h3>
                                 </div>
                             </div>
-							<img src="/img/${post.myPosition}라인.svg"/>
+							<img id="position" src="/img/${post.myPosition}라인.svg"/>
                             <p>포지션: ${post.myPosition}</p>
-							<img src="/img/${post.findPosition}라인.svg"/>
+							<img id="position" src="/img/${post.findPosition}라인.svg"/>
                             <p>찾는 포지션: ${post.findPosition}</p>
 							<img id="tierImg" src="/img/${post.lolTier}.png" alt="Rank Tier" />	
                             <p>티어: ${post.lolTier} (${post.lolRank})</p>
