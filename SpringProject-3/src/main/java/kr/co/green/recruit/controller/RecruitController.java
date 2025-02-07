@@ -35,7 +35,7 @@ public class RecruitController {
 	private final RiotApiController riotApiController;
 	
 	// api키 
-	private static final String API_KEY = "RGAPI-5b1036a8-f763-47c3-80e9-23ca468aad6f";
+	private static final String API_KEY = "RGAPI-a1db09f0-9356-4720-8c1b-e751ee8745a1";
 	
 	private static final String REGION = "kr";
 	

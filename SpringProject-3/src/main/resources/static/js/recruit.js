@@ -17,6 +17,43 @@ $(document).mouseup(function (e) {
     }
 });
 
+function showPopup2(abs) {
+    document.querySelector('#popup2').classList.remove('hide');
+	
+	const riotNameElement = abs.getElementsByClassName('riot-name')[0];	
+	document.getElementById('input-riot-name').textContent = riotNameElement.textContent;
+	
+	const myPositionElement = abs.getElementsByClassName('my-position')[0];
+	document.getElementById('input-my-position').textContent = myPositionElement.textContent;
+	
+	const findPositionElement = abs.getElementsByClassName('find-position')[0];
+	document.getElementById('input-find-position').textContent = findPositionElement.textContent;
+	
+	const summonerImg = abs.getElementsByClassName('summoner-icon')[0];
+	document.getElementsByClassName('input-summoner-icon')[0].src = summonerImg.src;
+
+	const myPositionImg = abs.getElementsByClassName('my-position-img')[0];
+	document.getElementsByClassName('input-my-position-img')[0].src = myPositionImg.src;
+	
+	const findPositionImg = abs.getElementsByClassName('find-position-img')[0];
+	document.getElementsByClassName('input-find-position-img')[0].src = findPositionImg.src;
+	
+	const contentText = abs.getElementsByClassName('post-content')[0];
+	document.getElementById('input-post-content').textContent = contentText.textContent;
+	
+	
+	
+	
+	
+	
+	
+}
+
+function closePopup2() {
+    document.querySelector('#popup2').classList.add('hide');
+}
+
+
 // 선택된 카테고리만 색변경
 document.addEventListener("DOMContentLoaded", function() {
     // 모든 포지션 버튼 가져오기
@@ -109,17 +146,17 @@ $(document).ready(function() {
                 posts.forEach(post => {
 					console.log("Adding post:",post);
                     let postHtml = `
-                        <div class="post">
+                        <div onclick="showPopup2(this)" class="post wow fadeInUp" data-wow-delay=".6s">
                             <div class="post-header">
                                 <div class="user-info">
-                                    <img src="${post.profileIconUrl}" id="summoner-icon" alt="소환사 아이콘">
-                                    <h3>${post.riotName} # ${post.riotTag}</h3>
+                                    <img id="summoner-icon" class="summoner-icon" src="${post.profileIconUrl}" id="summoner-icon" alt="소환사 아이콘">
+                                    <h3 class="riot-name">${post.riotName} # ${post.riotTag}</h3>
                                 </div>
                             </div>
-							<img id="position" src="/img/${post.myPosition}라인.svg"/>
-                            <p>포지션: ${post.myPosition}</p>
-							<img id="position" src="/img/${post.findPosition}라인.svg"/>
-                            <p>찾는 포지션: ${post.findPosition}</p>
+							<img class="my-position-img" id="position" src="/img/${post.myPosition}라인.svg"/>
+                            <p class="my-position">포지션: ${post.myPosition}</p>
+							<img class="find-position-img"id="position" src="/img/${post.findPosition}라인.svg"/>
+                            <p class="find-position"찾는 포지션: ${post.findPosition}</p>
 							<img id="tierImg" src="/img/${post.lolTier}.png" alt="Rank Tier" />	
                             <p>티어: ${post.lolTier} (${post.lolRank})</p>
                             <p>승률: ${((post.lolWin / (post.lolWin + post.lolLose)) * 100).toFixed(2)}%</p>
@@ -148,7 +185,7 @@ $(document).ready(function() {
     
 });
 
-// 소환사 프로필 이미지 가져오기
+
 
 
 
