@@ -2273,7 +2273,26 @@ ol {
 .lol-img {
   background-image: url(../img/메인페이지\ 카테고리\ 롤.png);
   background-size: cover;
-  
+}
+.karina {
+  background-image: url(../img/발로란트1.png);
+  background-size: cover;
+}
+.bag {
+  background-image: url(../img/배틀그라운드2.png);
+  background-size: cover;
+}
+.sud {
+  background-image: url(../img/서든어택2.png);
+  background-size: cover;
+}
+.lost {
+  background-image: url(../img/로스트아크.png);
+  background-size: cover;
+}
+.maple {
+  background-image: url(../img/메이플스토리5.png);
+  background-size: cover;
 }
 
 .services .single-service .main-icon {
