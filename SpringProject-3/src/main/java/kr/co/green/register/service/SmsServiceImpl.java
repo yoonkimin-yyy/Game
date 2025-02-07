@@ -1,10 +1,7 @@
 package kr.co.green.register.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -12,10 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
-import kr.co.green.register.dto.RegisterDTO;
 import kr.co.green.register.dto.SaveCodeDTO;
 import kr.co.green.register.mapper.SaveCodeMapper;
 import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Service
@@ -53,13 +51,13 @@ public class SmsServiceImpl implements SmsService{
     	// 6자리 랜덤 인증번호 생성
     	String code =  generateRandomCode(6);
     	// sms 메세지 작성
-    //	Message message = new Message();
-    //	message.setFrom(fromNumber);
-    //	message.setTo(phoneNumber);
-    //	message.setText("인증번호는 [" + code + "] 입니다.");
+    	Message message = new Message();
+    	message.setFrom(fromNumber);
+    	message.setTo(phoneNumber);
+    	message.setText("인증번호는 [" + code + "] 입니다.");
     	
     	// 메세지 발송
-    //	messageService.sendOne(new SingleMessageSendingRequest(message));
+    	messageService.sendOne(new SingleMessageSendingRequest(message));
 
     	SaveCodeDTO saveCode = new SaveCodeDTO();
     	
