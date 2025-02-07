@@ -90,11 +90,11 @@ public class RegisterServiceImpl  implements RegisterService{
     }
     
     @Override
-    public String  findUserId(String userEmail) {
+    public String findUserId(String userEmail) {
     	System.out.println(userEmail);
     	
     	String useEmail = registerMapper.findUserId(userEmail);
-    	
+    	System.out.println("aaa"+useEmail);
     	System.out.println(useEmail);
     	
     	if(useEmail == null) {

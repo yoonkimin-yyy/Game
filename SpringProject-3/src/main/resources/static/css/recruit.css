@@ -390,7 +390,7 @@ h3 {
 	margin-left: 0px;
 }
 #tier-div {
-	width: 100px;
+	width: 115px;
 	height: 100px;
 	text-align: center;
 }
@@ -430,6 +430,16 @@ h3 {
 	display: flex;         /* Flexbox 레이아웃 사용 */
     align-items: center;
 }
+.divdivdiv {
+  display: flex;
+  justify-content: center;
+}
+.divdiv {
+	width: 500px;
+	height: 200px;
+	background-color: #000000;
+}
+
 
 
 

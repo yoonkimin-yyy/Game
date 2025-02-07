@@ -101,11 +101,12 @@
     
     
 	<select id="signIn" resultMap="userResultMap">
-	SELECT * FROM USER_INFO
-	WHERE user_id = #{userId}
-	or user_email = #{userId}
+		SELECT * FROM USER_INFO
+		WHERE user_id = #{userId}
+		or user_email = #{userId}
 	
 	</select>
+
 	<select id="findUserId" resultType="string">
 	SELECT user_id FROM USER_INFO
 	WHERE user_email = #{userEmail}
@@ -117,6 +118,8 @@
 	WHERE user_email = #{userEmail}
 	
 	</update>
+
+	
 
 
 </mapper>
