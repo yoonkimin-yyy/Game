@@ -81,23 +81,7 @@
 
         <button onclick="showPopup()" class="enroll-button">DUO 구하기</button>
     </div>
-    <div class="divdivdiv">
-    	<div class="divdiv">
-    		
-    	</div>
-    	
-    	
-    	<div>
-    	
-    	</div>
-    	<div></div>
-    	<div></div>
-    	<div></div>
-    	<div></div>
-    	<div></div>
-    </div>
-
-    <div>
+ 
 	<!-- dd -->
     </div>
   <form th:action="@{/MatchMyduo/enroll}" method="POST">
@@ -179,7 +163,16 @@
     </div>
  </form>
 
-    <section  class="post-section">
+    <section class="post-section">
+    	<div class="wow fadeInUp" data-wow-delay=".6s" style="display:flex;background-color:#fffff0; border-radius:8px;">
+    		<div style="margin-right:100px;margin-left:100px">닉네임</div>
+    		<div style="margin-left:73px;">주 포지션</div>
+    		<div style="margin-left:50px;">티어</div>
+    		<div style="margin-left:35px;">찾는 포지션</div>
+    		<div style="margin-left:80px;">승률</div>
+    		<div style="margin-left:140px;">메모</div>
+    		<div style="margin-left:120px;">등록일시</div>
+    	</div>
         <div onclick="showPopup2(this)" th:each="post,iterStat : ${posts}"class="post wow fadeInUp"  data-wow-delay=".6s">
             <div class="post-header">
                 <div class="user-info">
