@@ -140,7 +140,9 @@ public class RegisterController {
 	@PostMapping("/findOfEmail")
 	public String findOfEmail(@RequestParam("userEmail") String userEmail,Model model) {
 		
+		
 		String foundUserId = registerService.findUserId(userEmail);
+		System.out.println("email : "+foundUserId);
 		
 		
 		
