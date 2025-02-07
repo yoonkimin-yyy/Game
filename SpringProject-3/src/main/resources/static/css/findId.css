@@ -1,6 +1,6 @@
 /* 전체 페이지 스타일 */
 body {
-    background-color: white; /* 다크 블루 배경 */
+    background-color: #0D1117; /* 다크 블루 배경 */
     color: #C8D1E6; /* 밝은 회색 텍스트 */
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -16,6 +16,9 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     width: 400px;
     margin: 100px auto;
+    margin-top: 200px;
+    margin-bpttom: 200px;
+    
 }
 
 /* 제목 스타일 */

@@ -81,9 +81,9 @@
 
         <button onclick="showPopup()" class="enroll-button">DUO 구하기</button>
     </div>
+
+
  
-	<!-- dd -->
-    </div>
   <form th:action="@{/MatchMyduo/enroll}" method="POST">
     <div id="popup" class="hide layer">
     
@@ -176,9 +176,11 @@
         <div onclick="showPopup2(this)" th:each="post,iterStat : ${posts}"class="post wow fadeInUp"  data-wow-delay=".6s">
             <div class="post-header">
                 <div class="user-info">
-                    <img id="summoner-icon" class="summoner-icon" name="summoner-icon" th:src="${post.profileIconUrl}" alt="소환사 아이콘">
-                    <div>
-                        <h3 class="riot-name" th:text="${post.riotName} + ' # ' + ${post.riotTag}"></h3>
+                	<div>
+                    	<img id="summoner-icon" class="summoner-icon" name="summoner-icon" th:src="${post.profileIconUrl}" alt="소환사 아이콘">
+                   	</div>
+                   	<div>
+                    	<h3 class="riot-name" th:text="${post.riotName} + ' # ' + ${post.riotTag}"></h3>
                     </div>
                 </div>
             </div> 
@@ -225,13 +227,25 @@
                 <div class="form-group">
                 	
                     	
-                	<div class="user-info" style="display:block;">
-                		<p>소환사 이름 (KR)</p>
-                    	<img style="display:inline-block;" class="input-summoner-icon" id="summoner-icon" src="" alt="소환사 아이콘">
+                		<p id="idid" style="display: inline;">소환사 이름 (KR)</p>
+                		<p id="ididid" style="display: inline;">티어</p>
+                		
+                	<div class="user-info" >
+                		
+                		<div class="dd">
+                    		<img style="display:inline-block;" class="input-summoner-icon" id="summoner-icon" src="" alt="소환사 아이콘">
+						</div>                    	
                     	<div>
                         	<h3 style="color:white; display:inline-block;" id="input-riot-name"></h3>
                 		</div>
-                    </div>
+                	
+                		
+                		<div class="tt">
+                			<img style="display:inline-block;" class="input-summoner-icon1" id="summoner-icon1" src="/img/BRONSE.png" alt="소환사 아이콘">
+                		</div>
+                	
+                	</div>
+                    
                     	
        					
                 	
