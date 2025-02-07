@@ -16,6 +16,8 @@ public interface RegisterService {
 	
 	public void saveVerificationCode(SaveCodeDTO saveCodeDTO); //인증번호 저장
 	
-	public String findUserId(String userEmail);
+	public String findUserId(String userEmail); // 아이디 찾기
+	
+	public String generateAndSaveTempPassword(String userEmail);
 	
 }

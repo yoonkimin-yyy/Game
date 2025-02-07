@@ -22,5 +22,7 @@ public interface RegisterMapper {
 	int countByKakaoId(@Param("kakaoId") String kakaoId);
 	
 	public String findUserId(@Param("userEmail") String userEmial);
+	
+	void updateUserPassword(@Param("userEmail") String userEmial, @Param("tempPassword") String tempPassword);
 }
 

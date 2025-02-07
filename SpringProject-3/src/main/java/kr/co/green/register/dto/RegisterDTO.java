@@ -26,6 +26,8 @@ public class RegisterDTO {
     private String userIntroduce;  // USER_INTRODUCE: 자기소개
     private String userRiot;       // USER_RIOT: Riot 계정 연동 여부 (기본값 NO)
     private int userInputCode;     // sms 인증코드
+    private String tempPassword; // 임시 비밀번호
+    private boolean isTempPassword; //
     
     private String kakaoId; // 카카오 고유 id
     private String kakaoProfile;
