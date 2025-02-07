@@ -132,6 +132,24 @@ public class RegisterController {
 		return "register/signup";
 		
 	}
+	@GetMapping("/findId")
+	public String findId() {
+		return "register/findId";
+	}
 	
+	@PostMapping("/findOfEmail")
+	public String findOfEmail(@RequestParam("userEmail") String userEmail,Model model) {
+		
+		String foundUserId = registerService.findUserId(userEmail);
+		
+		
+		
+		if(foundUserId == null) {
+			model.addAttribute("error", "해당 이메일로 가입된 아이다가 없습니다.");
+		}else {
+			model.addAttribute("userId", foundUserId);
+		}
+		return "register/findId";
+	}
 	
 }

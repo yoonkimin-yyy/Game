@@ -175,13 +175,20 @@
                 </div>
             </div> 
             <div>
+
+            	<img id="position" th:src="@{'/img/'+${post.myPosition}+'라인.svg'}"/>
+
                 <p th:text="${post.myPosition}"></p>
             </div> 
             <div>
-                <p th:text="${post.lolTier}"></p>
-                <p th:text="${post.lolRank}"></p>
+            	<img id="tierImg" th:src="@{'/img/'+${post.lolTier}+'.png'}" alt="Rank Tier" />
+                <p class="tier" th:text="${post.lolTier}"></p>
+                <p class="tier" th:text="${post.lolRank}"></p>
             </div>
             <div>
+
+            	<img id="position" th:src="@{'/img/'+${post.findPosition}+'라인.svg'}"/>
+
                 <p th:text="${post.findPosition}"></p>
             </div>
             <div>
@@ -191,12 +198,9 @@
             	<p th:text="${#numbers.formatDecimal(post.lolWin/(post.lolWin+post.lolLose)*100,2,0)}"></p>
             </div>
             <div>
-                KDA
-            </div>
-            <div>
                 <p class="post-content" th:text="${post.partyContent}"></p>
             </div>
-            <div>
+            <div class="date">
                 <p th:text="${post.createdDate}"></p>
             </div>
         </div>

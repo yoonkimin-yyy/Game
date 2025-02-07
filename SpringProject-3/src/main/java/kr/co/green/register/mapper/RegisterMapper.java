@@ -20,5 +20,7 @@ public interface RegisterMapper {
 	
 	int insertKakaoUser();
 	int countByKakaoId(@Param("kakaoId") String kakaoId);
+	
+	public String findUserId(@Param("userEmail") String userEmial);
 }
 

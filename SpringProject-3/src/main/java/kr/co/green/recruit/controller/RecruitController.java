@@ -3,6 +3,8 @@ package kr.co.green.recruit.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import kr.co.green.api.controller.RiotApiController;
 import kr.co.green.recruit.dto.PageInfoDTO;
@@ -30,7 +35,7 @@ public class RecruitController {
 	private final RiotApiController riotApiController;
 	
 	// api키 
-	private static final String API_KEY = "RGAPI-69e9e891-66cb-4b93-8ce2-83022ae2a952";
+	private static final String API_KEY = "RGAPI-5b1036a8-f763-47c3-80e9-23ca468aad6f";
 	
 	private static final String REGION = "kr";
 	
@@ -53,17 +58,56 @@ public class RecruitController {
 		PageInfoDTO piResult = (PageInfoDTO) result.get("pi");
 		List<RecruitDTO> postsResult = (List<RecruitDTO>) result.get("posts");
 		for(RecruitDTO item : postsResult) {
+			// puuid 가져오기
 			 String getPuuidUrl = String.format("https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s",
-		                item.getRiotName(), item.getRiotTag(), API_KEY);  
+		                item.getRiotName(), item.getRiotTag(), API_KEY); 
 			ResponseEntity<String> getPuuidResponse = riotApiController.fetchFromRiotApi(getPuuidUrl);
 			String puuid = extractPuuidFromResponse(getPuuidResponse, "puuid");
 			
+			String tier = item.getLolTier();
+			
+			// 티어별 이미지 URL 설정
+			
+			 item.setTierIconUrl("http://ddragon.leagueoflegends.com/cdn/15.3.1/img/tier/"+tier+".png");
+			 
+			 System.out.println("ddd"+item.getTierIconUrl());
+			// 티어별 이미지 URL을 출력
+
+
+	        
+	        
+	        
+	        // 
+
+	        
+//	        JsonElement jsonElement2 = JsonParser.parseString(responseBody2);  // JsonElement로 파싱
+//	        JsonArray matchIdsArray2 = jsonElement2.getAsJsonArray();
+	        
+	        
+//	        String puuid2 = responseBody2.participants.get(0).getAsJsonObject().get("puuid").getAsString();
+//	        System.out.println("Participant puuid: " + puuid);
+	        
+			
+			
+			// puuid로 소환사 아이콘 이미지 아이디 가져오기
 			String getIconUrl = String.format("https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/%s?api_key=%s",
 	    			puuid, API_KEY);
 			ResponseEntity<String> getIconResponse = riotApiController.fetchFromRiotApi(getIconUrl);
 			String profileIconId = extractPuuidFromResponse(getIconResponse, "profileIconId");
+			System.out.println(profileIconId);
 			
+			// 소환사 아이콘 이미지 아이디로 라이엇 api서버에 이미지 요청
 			item.setProfileIconUrl("http://ddragon.leagueoflegends.com/cdn/15.3.1/img/profileicon/" + profileIconId +".png");
+			
+			
+			
+			
+			
+			
+
+
+			
+
 		}
 		
 		System.out.println("current Page: " + currentPage);
@@ -72,7 +116,8 @@ public class RecruitController {
 		
 		model.addAttribute("posts",postsResult);
 		model.addAttribute("pi",piResult);
-		
+		System.out.println(piResult.getOffset());
+		System.out.println(piResult.getLimit());
 //		RiotApiController riot = new RiotApiController(); 
 //		System.out.println(riot.getProfile());
 		
@@ -145,4 +190,10 @@ public class RecruitController {
 	        return null;
 	    }
 	}
+	
+	
+	
+	
+	
+
 }
