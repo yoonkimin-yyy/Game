@@ -88,6 +88,24 @@ public class RegisterServiceImpl  implements RegisterService{
     	saveCodeMapper.saveVerificationCode(saveCodeDTO);
     }
     
+    @Override
+    public String  findUserId(String userEmail) {
+    	System.out.println(userEmail);
+    	
+    	String useEmail = registerMapper.findUserId(userEmail);
+    	
+    	System.out.println(useEmail);
+    	
+    	if(useEmail == null) {
+    		return null;
+    	}else {
+    		return maskUserId(useEmail);
+    	}
+    }
+    private String maskUserId(String userId) {
+    	if(userId.length() <= 3)return "***";
+    	return userId.substring(0,3) + "***";
+    }
 }	
 	
 	
