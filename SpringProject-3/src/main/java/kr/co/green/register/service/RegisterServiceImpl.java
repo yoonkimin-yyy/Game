@@ -1,6 +1,7 @@
 
 package kr.co.green.register.service;
 
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -105,6 +106,31 @@ public class RegisterServiceImpl  implements RegisterService{
     private String maskUserId(String userId) {
     	if(userId.length() <= 3)return "***";
     	return userId.substring(0,3) + "***";
+    }
+    @Override
+    public String generateAndSaveTempPassword(String userEmail) {
+    	// 임시 비밀 번호 생성 랜덤한
+    	String tempPassword = generateRandomPassword(10);
+    	
+    	// 비밀번호 암호화후 db에 업데이트
+    	String encryptedPassword = passwordEncoder.encode(tempPassword);
+    	registerMapper.updateUserPassword(userEmail, encryptedPassword);
+    	
+    	return tempPassword;
+    	
+    }
+    
+    
+    
+    private String generateRandomPassword(int length) {
+    	String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
+        StringBuilder password = new StringBuilder();
+        SecureRandom random = new SecureRandom();
+        
+        for(int i=0; i < length; i++) {
+        	password.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return password.toString();
     }
 }	
 	

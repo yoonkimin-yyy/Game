@@ -136,7 +136,7 @@ public class RegisterController {
 	public String findId() {
 		return "register/findId";
 	}
-	
+	// 아이디 찾기
 	@PostMapping("/findOfEmail")
 	public String findOfEmail(@RequestParam("userEmail") String userEmail,Model model) {
 		
@@ -151,5 +151,28 @@ public class RegisterController {
 		}
 		return "register/findId";
 	}
+	@GetMapping("/findPassword")
+	public String findPassword() {
+		return "register/findPassword";
+	}
+	@PostMapping("/giveNewPassword")
+	public String giveNewPassword(@RequestParam("userEmail")String userEmail, Model model) {
+		System.out.println(userEmail);
+		boolean emailExists = registerService.checkEmail(userEmail);
+		
+		if(!emailExists) {
+			model.addAttribute("error", "해당 이메일로 가입된 계정이 없습니다.");
+			return "register/findPassword";
+		}
+		
+		// 임시 비번 생성 및 저장
+		String tempPassword = registerService.generateAndSaveTempPassword(userEmail);
+		System.out.println(tempPassword);
+		
+		model.addAttribute("success", "임시 비밀번호 : " + tempPassword);
+		
+		return "register/findPassword";
+	}
+	
 	
 }

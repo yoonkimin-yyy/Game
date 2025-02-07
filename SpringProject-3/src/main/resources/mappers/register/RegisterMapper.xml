@@ -109,7 +109,14 @@
 	<select id="findUserId" resultType="string">
 	SELECT user_id FROM USER_INFO
 	WHERE user_email = #{userEmail}
-	</select>		
+	</select>	
+	
+	<update id="updateUserPassword"	>
+	UPDATE user_info
+	SET user_password = #{tempPassword}
+	WHERE user_email = #{userEmail}
+	
+	</update>
 
 
 </mapper>
